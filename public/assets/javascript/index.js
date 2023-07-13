@@ -6,9 +6,7 @@ let cdn_style = [
 ];
 
 let cdn_script = [
-    'assets/javascript/jquery.js',
-    'assets/javascript/Modal.js',
-    'assets/components/modal.js'
+    'assets/javascript/layout.js'
 ];
 
 cdn_style.map(link => {
