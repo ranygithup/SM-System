@@ -1,13 +1,12 @@
 let head = document.head;
 
 let cdn_style = [
-    'assets/css/bootstrap.css'
+    'assets/css/bootstrap.css',
+    'assets/css/layout.css'
 ];
 
 let cdn_script = [
-    'assets/javascript/bootstrap.js',
     'assets/javascript/jquery.js',
-    'assets/javascript/jquery-modal.js',
     'assets/javascript/Modal.js',
     'assets/components/modal.js'
 ];
@@ -22,7 +21,7 @@ cdn_style.map(link => {
 
 cdn_script.map(link => {
     let scriptTag = document.createElement('script');
-    scriptTag.setAttribute('defer','');
+    scriptTag.setAttribute('language','javascript');
     scriptTag.setAttribute('type','text/javascript');
     scriptTag.setAttribute('src',document.baseURI+link);
     head.appendChild(scriptTag);
