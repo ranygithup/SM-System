@@ -5,8 +5,11 @@ let cdn_style = [
 ];
 
 let cdn_script = [
-    'assets/javascript/script.js',
-    'assets/javascript/bootstrap.js'
+    'assets/javascript/bootstrap.js',
+    'assets/javascript/jquery.js',
+    'assets/javascript/jquery-modal.js',
+    'assets/javascript/Modal.js',
+    'assets/components/modal.js'
 ];
 
 cdn_style.map(link => {
@@ -19,6 +22,7 @@ cdn_style.map(link => {
 
 cdn_script.map(link => {
     let scriptTag = document.createElement('script');
+    scriptTag.setAttribute('defer','');
     scriptTag.setAttribute('type','text/javascript');
     scriptTag.setAttribute('src',document.baseURI+link);
     head.appendChild(scriptTag);
