@@ -7,14 +7,8 @@
             <i id="toggle_aside" class="fa-solid fa-angles-right"></i>
         </div>
     </div>
-    <div class="list-menu">
+    <div id="list_menus" class="list-menu">
         <ul>
-            <li>
-                <span class="pe-2">
-                    <i class="fa-solid fa-chart-line"></i>
-                </span>
-                <span class="list-menu-title">Dashboard</span>
-            </li>
             <li>
                 <span></span>
                 <span class="list-menu-title">Department</span>
