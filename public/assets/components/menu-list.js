@@ -2,6 +2,7 @@ class Menu{
     constructor(id, list_menu=[]){
         this.id = id;
         this.menu = list_menu;
+        this.renderMenu();
     }
 
     renderMenu = () => {
@@ -20,9 +21,3 @@ class Menu{
         $(`#${this.id}`).html(html);
     }
 }
-
-window.addEventListener('DOMContentLoaded', () => {
-    let menus_list = ['Dashboard'];
-    const menu = new Menu('list_menus',menus_list);
-    menu.renderMenu();
-});

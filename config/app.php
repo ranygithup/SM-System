@@ -26,5 +26,8 @@ return [
         App\Providers\RouteServiceProvider::class,
     ])->toArray(),
 
-    'aliases' => Facade::defaultAliases()->merge([])->toArray(),
+    'aliases' => Facade::defaultAliases()->merge([
+        'ScriptManager' => App\ScriptManagement\ScriptProvider::class,
+        'StyleManager' => App\StyleManagement\StyleProvider::class
+    ])->toArray(),
 ];

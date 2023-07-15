@@ -140,6 +140,7 @@ body{
 .component-container{
     width:100%;
     height:calc(100% - 60px);
+    padding:1rem;
 }
 
 .title-navbar-right{

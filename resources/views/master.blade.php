@@ -4,7 +4,10 @@
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>System For Testing</title>
-        <script defer type="text/javascript" src="{{ asset('assets/javascript/index.js') }}"></script>
+        <?php
+            StyleManager::render();
+            ScriptManager::render();
+        ?>
     </head>
     <body>
         <div class="main-layout">
