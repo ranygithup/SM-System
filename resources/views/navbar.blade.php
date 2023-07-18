@@ -1,5 +1,7 @@
 <div class="navbar-container">
-    <div class="title-navbar-left"></div>
+    <div class="title-navbar-left">
+        <h5 id="screen_title"></h5>
+    </div>
     <div class="title-navbar-right">
         <div class="title-navbar-container">
             <div class="tnc-notification">

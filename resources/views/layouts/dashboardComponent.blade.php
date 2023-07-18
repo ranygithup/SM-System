@@ -1,4 +1,4 @@
-<div id="_main_dashboardComponent">
+<div id="_main_dashboardComponent" style="display:none">
     <div class="row row-cols-lg-4 gy-2">
         <div class="col">
             <div class="d-flex p-3 bg-white rounded-3">
