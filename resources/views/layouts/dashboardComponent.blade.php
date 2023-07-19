@@ -56,16 +56,72 @@
         <div class="col">
             <div class="row row-cols-lg-2 gy-2">
                 <div class="col">
-                    <div class="p-3 bg-white rounded-3"></div>
+                    <div class="p-3 bg-white rounded-3">
+                        <div class="w-100">
+                            <img class="db_icons_" src="{{ asset('icons/facebook.png') }}" alt=""/>
+                        </div>
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="w-50">
+                                <p class="fw-bold my-0">Like us</p>
+                                <p class="fw-bold my-0">on Facebook</p>
+                            </div>
+                            <div class="vr"></div>
+                            <div class="w-50 text-center">
+                                <h4 class="fw-bold my-0 ms-2">30000</h4>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col">
-                    <div class="p-3 bg-white rounded-3"></div>
+                    <div class="p-3 bg-white rounded-3">
+                        <div class="w-100">
+                            <img class="db_icons_" src="{{ asset('icons/facebook.png') }}" alt=""/>
+                        </div>
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="w-50">
+                                <p class="fw-bold my-0">Like us</p>
+                                <p class="fw-bold my-0">on Telegram</p>
+                            </div>
+                            <div class="vr"></div>
+                            <div class="w-50 text-center">
+                                <h4 class="fw-bold my-0 ms-2">13000</h4>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col">
-                    <div class="p-3 bg-white rounded-3"></div>
+                    <div class="p-3 bg-white rounded-3">
+                        <div class="w-100">
+                            <img class="db_icons_" src="{{ asset('icons/facebook.png') }}" alt=""/>
+                        </div>
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="w-50">
+                                <p class="fw-bold my-0">Like us</p>
+                                <p class="fw-bold my-0">on Tik Tok</p>
+                            </div>
+                            <div class="vr"></div>
+                            <div class="w-50 text-center">
+                                <h4 class="fw-bold my-0 ms-2">9000</h4>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col">
-                    <div class="p-3 bg-white rounded-3"></div>
+                    <div class="p-3 bg-white rounded-3">
+                        <div class="w-100">
+                            <img class="db_icons_" src="{{ asset('icons/facebook.png') }}" alt=""/>
+                        </div>
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="w-50">
+                                <p class="fw-bold my-0">Like us</p>
+                                <p class="fw-bold my-0">on Instagram</p>
+                            </div>
+                            <div class="vr"></div>
+                            <div class="w-50 text-center">
+                                <h4 class="fw-bold my-0 ms-2">3000</h4>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

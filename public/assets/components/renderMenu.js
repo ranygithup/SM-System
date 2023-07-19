@@ -53,47 +53,47 @@ window.addEventListener('DOMContentLoaded', () => {
         {
             'name':'Score',
             'component':'ScoreComponent',
-            'icon':''
+            'icon':'score.png'
         },
         {
             'name':'Attendance',
             'component':'AttendanceComponent',
-            'icon':''
+            'icon':'attendance.png'
         },
         {
             'name':'Student List',
             'component':'StudentListComponent',
-            'icon':''
+            'icon':'student_list.png'
         },
         {
             'name':'Teacher List',
             'component':'TeacherListComponent',
-            'icon':''
+            'icon':'teacher_list.png'
         },
         {
             'name':'Job Opportunity',
             'component':'JobOpportunityComponent',
-            'icon':''
+            'icon':'job_opportunity.png'
         },
         {
             'name':'Branch and Location',
             'component':'BranchAndLocationComponent',
-            'icon':''
+            'icon':'branch_and_location.png'
         },
         {
             'name':'User Management',
             'component':'UserManagementComponent',
-            'icon':''
+            'icon':'user_management.png'
         },
         {
             'name':'Mobile Setting',
             'component':'MobileSettingsComponent',
-            'icon':''
+            'icon':'mobile_setting.png'
         },
         {
             'name':'Log Out',
             'component':'LogOutComponent',
-            'icon':''
+            'icon':'logout.png'
         }
     ];
     const menu = new Menu('list_menus',menus_list);

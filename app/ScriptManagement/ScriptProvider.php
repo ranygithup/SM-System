@@ -21,8 +21,9 @@
             $scripts = array(
                 'assets/components/menuList.js',
                 'assets/javascript/layout.js',
-                'assets/javascript/Modal.js',
-                'assets/components/renderMenu.js'
+                'assets/javascript/modal.js',
+                'assets/components/renderMenu.js',
+                'assets/javascript/api.js'
             );
 
             foreach(array($scripts_load, $components_load) as $script){

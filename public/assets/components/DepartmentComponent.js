@@ -4,12 +4,20 @@ var DepartmentComponent = new function(){
     this.title_prop = "Department";
     this.self = $('#_main_departmentComponent');
 
+    this.tblDepartment = mThis.self.find('#_dpt_tbl');
+
     this.init = () => {}
+
+    this.displayDepartment = (onFinish = null) => {
+        if(typeof onFinish === 'function') onFinish();
+    }
 
     this.show = (options) => {
         if(!options) options = {};
-        main_view.setTitle(mThis.title_prop);
-        mThis.self.show().siblings().hide();
+        mThis.displayDepartment(() => {
+            main_view.setTitle(mThis.title_prop);
+            mThis.self.show().siblings().hide();
+        });
     }
 }
 
