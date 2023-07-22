@@ -51,7 +51,9 @@
     </div>
     <div class="row row-cols-lg-2 gy-2 mt-3">
         <div class="col">
-            <div class="p-3 bg-white h-100 rounded-3"></div>
+            <div class="chart-container p-3 bg-white h-100 rounded-3 position-relative">
+                <canvas id="_db_chart" class="w-100 h-100"></canvas>
+            </div>
         </div>
         <div class="col">
             <div class="row row-cols-lg-2 gy-2">
@@ -75,7 +77,7 @@
                 <div class="col">
                     <div class="p-3 bg-white rounded-3">
                         <div class="w-100">
-                            <img class="db_icons_" src="{{ asset('icons/facebook.png') }}" alt=""/>
+                            <img class="db_icons_" src="{{ asset('icons/telegram.png') }}" alt=""/>
                         </div>
                         <div class="d-flex align-items-center mt-3">
                             <div class="w-50">
@@ -92,7 +94,7 @@
                 <div class="col">
                     <div class="p-3 bg-white rounded-3">
                         <div class="w-100">
-                            <img class="db_icons_" src="{{ asset('icons/facebook.png') }}" alt=""/>
+                            <img class="db_icons_" src="{{ asset('icons/tiktok.png') }}" alt=""/>
                         </div>
                         <div class="d-flex align-items-center mt-3">
                             <div class="w-50">
@@ -109,7 +111,7 @@
                 <div class="col">
                     <div class="p-3 bg-white rounded-3">
                         <div class="w-100">
-                            <img class="db_icons_" src="{{ asset('icons/facebook.png') }}" alt=""/>
+                            <img class="db_icons_" src="{{ asset('icons/instagram.png') }}" alt=""/>
                         </div>
                         <div class="d-flex align-items-center mt-3">
                             <div class="w-50">
@@ -128,7 +130,9 @@
     </div>
     <div class="row gy-2 mt-3">
         <div class="col-lg-6">
-            <div class="p-3 bg-white rounded-3"></div>
+            <div class="p-3 bg-white rounded-3">
+                <div id="_db_calendar"></div>
+            </div>
         </div>
         <div class="col-xl-3">
             <div class="p-3 bg-white rounded-3"></div>

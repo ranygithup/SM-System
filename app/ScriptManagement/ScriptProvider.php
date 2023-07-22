@@ -10,7 +10,9 @@
                 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js',
                 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js',
                 'https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js',
-                'https://cdn.jsdelivr.net/npm/chart.js'
+                'https://cdn.jsdelivr.net/npm/chart.js',
+                'https://cdn.jsdelivr.net/npm/sweetalert2@11',
+                'assets/javascript/api.js'
             );
 
             $components_load = array(
@@ -23,7 +25,6 @@
                 'assets/javascript/layout.js',
                 'assets/javascript/modal.js',
                 'assets/components/renderMenu.js',
-                'assets/javascript/api.js'
             );
 
             foreach(array($scripts_load, $components_load) as $script){
