@@ -13,12 +13,14 @@
                 'https://cdn.jsdelivr.net/npm/chart.js',
                 'https://cdn.jsdelivr.net/npm/sweetalert2@11',
                 'assets/javascript/api.js',
-                'assets/javascript/confirm.js'
+                'assets/javascript/confirm.js',
+                'assets/javascript/initializeSelect2.js'
             );
 
             $components_load = array(
                 'assets/components/DashboardComponent.js',
-                'assets/components/DepartmentComponent.js'
+                'assets/components/DepartmentComponent.js',
+                'assets/components/MainProgramComponent.js'
             );
 
             $scripts = array(

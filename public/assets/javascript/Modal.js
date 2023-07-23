@@ -48,6 +48,12 @@ class Modal{
 
         modal.innerHTML = html;
         document.body.appendChild(modal);
+        $(`#${this.id}`).find(".modal-select2").select2({
+            tags: true,
+            allowClear: true,
+            placeholder: 'Select an option',
+            dropdownParent: $(`#${this.id}`)
+        });
 
         $(`#${this.id}`).on('hidden.bs.modal',function(e){
             e.preventDefault();
@@ -87,7 +93,10 @@ class Modal{
         $(`#${this.id}`).find('.data-input').each(function(){
             let el = $(this);
             let f = el.data('field');
-            el.val(d[f]);
+            if(el.is('select'))
+                el.val(d[f]).trigger('change');
+            else
+                el.val(d[f]);
         });
     }
 

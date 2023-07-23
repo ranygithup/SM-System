@@ -109,7 +109,7 @@ var DepartmentComponent = new function(){
                     createdRow: (row, data, dataIndex) => {
                         let tr = $(row);
                         tr.data("id", data.id);
-                    },
+                    }
                 });
             };
 
