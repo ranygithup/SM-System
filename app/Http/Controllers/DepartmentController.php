@@ -30,22 +30,36 @@ class DepartmentController extends Controller
         }
         else{
             $data = $req->input();
-            try
-            {
-                $department = new Department();
-                $department->name = $data['name'];
-                $department->save();
-                return response()->json([
-                    'status' => 200,
-                    'data' => "Department Added"
-                ]);
+
+            if($data['id'] > 0){
+                $id = $data['id'];
+                $name = $data['name'];
+                $row = DB::update('UPDATE department SET `name` = ? WHERE id = ?',[$name,$id]);
+                if($row){
+                    return response()->json([
+                        'status' => 200,
+                        'message' => 'Updated Successfully!'
+                    ]);
+                }
             }
-            catch(Exception $e)
-            {
-                return response()->json([
-                    'status' => 500,
-                    'error_message' => 'Something went wrong'
-                ]);
+            else{
+                try
+                {
+                    $department = new Department();
+                    $department->name = $data['name'];
+                    $department->save();
+                    return response()->json([
+                        'status' => 200,
+                        'data' => "Department Added"
+                    ]);
+                }
+                catch(Exception $e)
+                {
+                    return response()->json([
+                        'status' => 500,
+                        'error_message' => 'Something went wrong'
+                    ]);
+                }
             }
         }
     }
@@ -64,6 +78,16 @@ class DepartmentController extends Controller
             return response()->json([
                 'status' => 200,
                 'message' => 'Deleted Successfully!'
+            ]);
+        }
+    }
+
+    function details(Request $req){
+        $row = DB::table('department')->where('id',$req->id)->first();
+        if($row){
+            return response()->json([
+                'status' => 200,
+                'data' => $row
             ]);
         }
     }

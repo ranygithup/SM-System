@@ -5,14 +5,16 @@ class Modal{
         'class_name': class_name,
         'html': html,
         'api_save': api_save,
-        'onClose': onClose
+        'api_modify': api_modify
     }){
         this.id = options.id,
         this.title = options.title,
         this.cls_name = options.class_name,
         this.html = options.html,
         this.api_save = options.api_save,
-        this.onClose = options.onClose
+        this.api_modify = options.api_modify,
+        this.onClose = null,
+        this.data_id = 0
     }
 
     renderModal = () => {
@@ -33,7 +35,7 @@ class Modal{
         let html = [`<div class="modal-dialog modal-dialog-scrollable ${this.cls_name ? this.cls_name : ''}">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">${this.title ? this.title : ''}</h4>
+                    <h4 class="modal-title">${this.m_title ? this.m_title : this.title}</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">${this.html ? this.html : ''}</div>
@@ -69,7 +71,7 @@ class Modal{
 
     getDataForm = () => {
         let p = {
-            'id': 0
+            'id': this.data_id
         };
         $(`#${this.id}`).find('.data-input').each(function(){
             let el = $(this);
@@ -79,8 +81,41 @@ class Modal{
         return p;
     }
 
-    show = () => {
-        this.renderModal();
+    setDataForm = (d) => {
+        d = d ? d : {};
+
+        $(`#${this.id}`).find('.data-input').each(function(){
+            let el = $(this);
+            let f = el.data('field');
+            el.val(d[f]);
+        });
+    }
+
+    loadDataDetails = (op) => {
+        api.postData(this.api_modify,{'id': op.id}).then(res => {
+            let data = {};
+            if(res.status === 200){
+                data = res.data;
+            }
+            this.setDataForm(data);
+        });
+    }
+
+    show = (op) => {
+        this.data_id = op.id;
+        this.onClose = op.onClose;
+
+        if(this.data_id > 0){
+            this.m_title = ['Modify',this.title].join(' ');
+            this.renderModal();
+            this.loadDataDetails(op);
+        }
+        else{
+            this.m_title = ['New',this.title].join(' ');
+            this.renderModal();
+            this.setDataForm(null);
+        }
+
         $(`#${this.id}`).modal('show');
     }
 }

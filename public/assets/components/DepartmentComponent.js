@@ -10,11 +10,24 @@ var DepartmentComponent = new function(){
     this.init = () => {
         mThis.btnNew.on('click',function(e){
             e.preventDefault();
-            department.title = "New Department";
-            department.onClose = () => {
-                mThis.displayDepartment();
+            let op = {
+                'id': 0,
+                'onClose': () => {
+                    mThis.displayDepartment();
+                }
             };
-            department.show();
+            department.show(op);
+        });
+
+        mThis.tblDepartment.on('click','a.btn-dpm-modify',function(e){
+            e.preventDefault();
+            let op = {
+                'id': $(this).data('id'),
+                'onClose': () => {
+                    mThis.displayDepartment();
+                }
+            };
+            department.show(op);
         });
 
         mThis.tblDepartment.on('click','a.btn-dpm-delete',function(e){
@@ -22,24 +35,12 @@ var DepartmentComponent = new function(){
             let op = {
                 'id': $(this).data('id')
             };
-            Swal.fire({
-                title: 'Delete this department?',
-                icon: 'question',
-                iconHtml: '؟',
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Delete',
-                cancelButtonText: 'Cancel',
-                showCancelButton: true,
-                showCloseButton: true
-            }).then((result) => {
-                if(result.isConfirmed){
-                    api.postData('api/department/delete', op).then(res => {
-                        if(res.status === 200){
-                            mThis.displayDepartment();
-                        }
-                    });
-                }
+            interact.confirm('Delete this department?', () => {
+                api.postData('api/department/delete', op).then(res => {
+                    if(res.status === 200){
+                        mThis.displayDepartment();
+                    }
+                });
             });
         });
     }
@@ -127,11 +128,13 @@ var DepartmentComponent = new function(){
 
 const department = new Modal({
     id: 'dlg_dpm',
+    title: "Department",
     api_save: 'api/department/save',
+    api_modify: 'api/department/details',
     html: [`<div class="form-group">
-        <label for="name" class="form-label">Department</label>
+        <label for="name" class="form-label">Name</label>
         <input type="text" class="form-control data-input" data-field="name"/>
-    </div>`].join(''),
+    </div>`].join('')
 });
 
 window.addEventListener('DOMContentLoaded', () => {

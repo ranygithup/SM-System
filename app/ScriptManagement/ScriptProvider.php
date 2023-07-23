@@ -12,7 +12,8 @@
                 'https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js',
                 'https://cdn.jsdelivr.net/npm/chart.js',
                 'https://cdn.jsdelivr.net/npm/sweetalert2@11',
-                'assets/javascript/api.js'
+                'assets/javascript/api.js',
+                'assets/javascript/confirm.js'
             );
 
             $components_load = array(

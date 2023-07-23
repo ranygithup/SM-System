@@ -1,21 +1,23 @@
 class API{
     async getData(apiUrl) {
-        const response = await fetch(`${document.baseURI}${apiUrl}`);
+        let api = [document.baseURI, apiUrl].join('');
+        const response = await fetch(api);
         const data = await response.json();
         return data;
     }
 
     async postData(apiUrl, payLoad){
-        const response = await fetch(apiUrl, {
+        let api = [document.baseURI, apiUrl].join('');
+        const response = await fetch(api, {
             method: 'POST',
-            body: JSON.stringify(payLoad),
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify(payLoad)
         });
         const data = await response.json();
         return data;
     }
 }
 
-var api = new API();
+const api = new API();

@@ -12,4 +12,5 @@ Route::prefix('department')->group(function(){
     Route::post('/save',[DepartmentController::class,'save']);
     Route::get('/list',[DepartmentController::class,'list']);
     Route::post('/delete',[DepartmentController::class,'delete']);
+    Route::post('/details',[DepartmentController::class,'details']);
 });
