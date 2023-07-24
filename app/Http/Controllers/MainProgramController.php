@@ -36,7 +36,7 @@ class MainProgramController extends Controller
                 $name = $data['name'];
                 $department_id = $data['department_id'];
 
-                $row = DB::update('UPDATE main_program SET `name` = ?,department_id = ?WHERE id = ?',[$name,$department_id,$id]);
+                $row = DB::update('UPDATE main_program SET `name` = ?,department_id = ? WHERE id = ?',[$name, $department_id, $id]);
 
                 if($row){
                     return response()->json([
@@ -75,6 +75,30 @@ class MainProgramController extends Controller
             return response()->json([
                 'status' => 200,
                 'data' => $rows
+            ]);
+        }
+    }
+
+    function details(Request $req){
+        $id = $req->id;
+        $row = DB::table('main_program')->where('id',$id)->selectRaw('id,name,department_id,created_at')->get()->first();
+
+        if($row){
+            return response()->json([
+                'status' => 200,
+                'data' => $row
+            ]);
+        }
+    }
+
+    function delete(Request $req){
+        $id = $req->id;
+
+        if($id){
+            DB::table('main_program')->where('id',$id)->delete();
+            return response()->json([
+                'status' => 200,
+                'data' => 'Delete Successfully!'
             ]);
         }
     }

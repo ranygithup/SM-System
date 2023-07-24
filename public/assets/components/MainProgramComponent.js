@@ -21,6 +21,34 @@ var MainProgramComponent = new function(){
                 main_program.show(op);
             });
         });
+
+        mThis.tblMainProgram.on('click','a.btn-mpg-modify',function(e){
+            e.preventDefault();
+            let op = {
+                'id': $(this).data('id'),
+                'onClose': () => {
+                    mThis.displayMainProgram();
+                }
+            }
+            loadFormOption((html) => {
+                main_program.html = html;
+                main_program.show(op);
+            });
+        });
+
+        mThis.tblMainProgram.on('click','a.btn-mpg-delete',function(e){
+            e.preventDefault();
+            let op = {
+                'id': $(this).data('id')
+            }
+            interact.confirm('Delete this main program?',() => {
+                api.postData('api/main-program/delete',op).then(res => {
+                    if(res.status === 200){
+                        mThis.displayMainProgram();
+                    }
+                });
+            });
+        });
     }
 
     this.displayMainProgram = (onFinish = null) => {
@@ -141,7 +169,8 @@ let loadFormOption = (onFinish = null) => {
 const main_program = new Modal({
     id: "main_program",
     title: "Main Program",
-    api_save: 'api/main-program/save'
+    api_save: 'api/main-program/save',
+    api_modify: 'api/main-program/details'
 });
 
 window.addEventListener('DOMContentLoaded',() => {

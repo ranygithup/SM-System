@@ -47,8 +47,19 @@ window.addEventListener('DOMContentLoaded', () => {
         },
         {
             'name':'Uniform',
-            'component':'UniformComponent',
-            'icon':'uniform.png'
+            'icon':'uniform.png',
+            'sub_menu':[
+                {
+                    "name":"Students",
+                    "component":"StudentUniformComponent",
+                    "icon":"uniform.png"
+                },
+                {
+                    "name":"Teacher",
+                    "component":"TeacherUniformComponent",
+                    "icon":"uniform.png"
+                }
+            ]
         },
         {
             'name':'Score',
@@ -57,8 +68,19 @@ window.addEventListener('DOMContentLoaded', () => {
         },
         {
             'name':'Attendance',
-            'component':'AttendanceComponent',
-            'icon':'attendance.png'
+            'icon':'attendance.png',
+            'sub_menu': [
+                {
+                    "name":"Teacher",
+                    "component":"TeacherAttendanceComponent",
+                    "icon":"teacher_list.png"
+                },
+                {
+                    "name":"Student",
+                    "component":"StudentAttendanceComponent",
+                    "icon":"student_list.png"
+                }
+            ]
         },
         {
             'name':'Student List',
@@ -82,8 +104,19 @@ window.addEventListener('DOMContentLoaded', () => {
         },
         {
             'name':'User Management',
-            'component':'UserManagementComponent',
-            'icon':'user_management.png'
+            'icon':'user_management.png',
+            'sub_menu':[
+                {
+                    "name":"Manage Role",
+                    "component":"Management Role",
+                    "icon":"user_management.png"
+                },
+                {
+                    "name":"Manage User",
+                    "component":"Management User",
+                    "icon":"user_management.png"
+                }
+            ]
         },
         {
             'name':'Mobile Setting',

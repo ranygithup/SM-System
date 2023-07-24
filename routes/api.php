@@ -19,4 +19,6 @@ Route::prefix('department')->group(function(){
 Route::prefix('main-program')->group(function(){
     Route::post('/save',[MainProgramController::class,'save']);
     Route::get('/list',[MainProgramController::class,'list']);
+    Route::post('/details',[MainProgramController::class,'details']);
+    Route::post('/delete',[MainProgramController::class,'delete']);
 });
