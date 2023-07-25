@@ -3,6 +3,7 @@ class Modal{
         'id': id,
         'title': title,
         'class_name': class_name,
+        'image': image,
         'html': html,
         'api_save': api_save,
         'api_modify': api_modify
@@ -10,11 +11,13 @@ class Modal{
         this.id = options.id,
         this.title = options.title,
         this.cls_name = options.class_name,
+        this.image = options.image,
         this.html = options.html,
         this.api_save = options.api_save,
         this.api_modify = options.api_modify,
-        this.onClose = null,
-        this.data_id = 0
+        this.data_id = 0;
+        this.onClose = null;
+        this.photo = null;
     }
 
     renderModal = () => {
@@ -48,6 +51,9 @@ class Modal{
 
         modal.innerHTML = html;
         document.body.appendChild(modal);
+        if(this.image)
+            this.imageRender(modal);
+        
         $(`#${this.id}`).find(".modal-select2").select2({
             tags: true,
             allowClear: true,
@@ -84,6 +90,7 @@ class Modal{
             let f = el.data('field');
             p[f] = el.val();
         });
+        p.photo = Modal.photo;
         return p;
     }
 
@@ -107,6 +114,34 @@ class Modal{
                 data = res.data;
             }
             this.setDataForm(data);
+        });
+    }
+
+    imageRender = (con) => {
+        let btn_image = this.image;
+        let btn_delete = [this.image,'_delete'].join('');
+
+        $(con).find(`#${btn_image}`).on('click',function(e){
+            e.preventDefault();
+            file.chooseFile((image) => {
+                Modal.photo = image;
+                let div = $(this).parent();
+
+                let html = [`<image class="w-100 h-100 rounded-3 data-input" src="${image}" alt="" data-field="photo"/>
+                <div class="image-options">
+                    <i id="${btn_delete}" class="fa-regular fa-trash-can text-danger fs-5"></i>
+                </div>`].join('');
+
+                div.html(html);
+                div.find(`#${btn_delete}`).on('click',function(e){
+                    e.preventDefault();
+                    let container_image = $(this).closest('.bok-dlg-image');
+
+                    container_image.html([`<div id="${btn_image}" class="bok-dlg-image-empty">
+                        <i class="fa-regular fa-image text-muted fs-3"></i>
+                    </div>`].join(''));
+                });
+            });
         });
     }
 

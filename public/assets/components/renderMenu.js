@@ -27,7 +27,7 @@ window.addEventListener('DOMContentLoaded', () => {
         },
         {
             'name':'Books',
-            'component':'BooksComponent',
+            'component':'BookComponent',
             'icon':'book.png'
         },
         {

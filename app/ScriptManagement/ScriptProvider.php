@@ -20,7 +20,8 @@
             $components_load = array(
                 'assets/components/DashboardComponent.js',
                 'assets/components/DepartmentComponent.js',
-                'assets/components/MainProgramComponent.js'
+                'assets/components/MainProgramComponent.js',
+                'assets/components/BookComponent.js'
             );
 
             $scripts = array(
@@ -28,6 +29,7 @@
                 'assets/javascript/layout.js',
                 'assets/javascript/modal.js',
                 'assets/components/renderMenu.js',
+                'assets/javascript/fileChooser.js'
             );
 
             foreach(array($scripts_load, $components_load) as $script){

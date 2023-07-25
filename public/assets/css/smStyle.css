@@ -24,3 +24,34 @@
 .select2-container--open .select2-search__field:focus{
     outline: none;
 }
+
+.bok-dlg-image{
+    width:100%;
+    height:100%;
+    border:1px dashed #808080;
+    border-radius:var(--bs-border-radius-lg);
+    cursor:pointer;
+    position: relative;
+}
+
+.bok-dlg-image .bok-dlg-image-empty{
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+
+.bok-dlg-image .image-options{
+    position:absolute;
+    top:0;
+    right:0;
+    padding:0.5rem;
+    border-radius: 0 var(--bs-border-radius-lg) 0 var(--bs-border-radius-lg);
+    background-color:#242424d3;
+    display: none;
+}
+
+.bok-dlg-image:hover .image-options{
+    display: block;
+}
