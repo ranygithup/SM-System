@@ -33,7 +33,7 @@ class Modal{
         };
 
         const entries = Object.entries(op);
-        entries.forEach(([key, value]) => modal.setAttribute(`${key}`,`${value}`));
+        entries.forEach(([key, value]) => modal.setAttribute(key,value));
 
         let html = [`<div class="modal-dialog modal-dialog-scrollable ${this.cls_name ? this.cls_name : ''}">
             <div class="modal-content">
@@ -90,7 +90,7 @@ class Modal{
             let f = el.data('field');
             p[f] = el.val();
         });
-        p.photo = Modal.photo;
+        p.photo = this.photo;
         return p;
     }
 
@@ -121,11 +121,11 @@ class Modal{
         let btn_image = this.image;
         let btn_delete = [this.image,'_delete'].join('');
 
-        $(con).find(`#${btn_image}`).on('click',function(e){
+        $(con).find(`#${btn_image}`).on('click',(e) => {
             e.preventDefault();
             file.chooseFile((image) => {
-                Modal.photo = image;
-                let div = $(this).parent();
+                this.photo = image;
+                let div = $(`#${btn_image}`).parent();
 
                 let html = [`<image class="w-100 h-100 rounded-3 data-input" src="${image}" alt="" data-field="photo"/>
                 <div class="image-options">
@@ -133,13 +133,15 @@ class Modal{
                 </div>`].join('');
 
                 div.html(html);
-                div.find(`#${btn_delete}`).on('click',function(e){
+                div.find(`#${btn_delete}`).on('click',(e) => {
                     e.preventDefault();
-                    let container_image = $(this).closest('.bok-dlg-image');
+                    let container_image = $(`#${btn_delete}`).closest('.bok-dlg-image');
 
                     container_image.html([`<div id="${btn_image}" class="bok-dlg-image-empty">
                         <i class="fa-regular fa-image text-muted fs-3"></i>
                     </div>`].join(''));
+
+                    this.imageRender(con);
                 });
             });
         });
