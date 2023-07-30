@@ -13,12 +13,12 @@ class FileChooser{
             reader.onload = function(e){
                 const dataURL = e.target.result;
                 callback && callback(dataURL);
-                input.remove();
             }
             reader.readAsDataURL(file);
         });
 
         input.click();
+        input.remove();
     }
 
     chooseFile = (callback) => {

@@ -49,7 +49,7 @@ let html = [`<div class="row gy-2">
     <div class="col-lg-8">
         <div class="form-group">
             <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control data-input" data-field="title"/>
+            <input type="text" class="form-control data-input" data-field="name"/>
         </div>
         <div class="form-group mt-3">
             <label for="description" class="form-label">Description</label>
@@ -63,7 +63,8 @@ const book = new Modal({
     title: 'Book',
     class_name: 'modal-lg',
     image: 'bok_dlg_empty',
-    html: html
+    html: html,
+    api_save:'api/book/save'
 });
 
 window.addEventListener('DOMContentLoaded',() => {
