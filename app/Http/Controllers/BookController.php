@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
+use App\Models\SaveImage;
 
 class BookController extends Controller
 {
@@ -27,15 +27,6 @@ class BookController extends Controller
         }
         else{
             $data = $req->input();
-
-            if($data['id'] > 0){
-                $id = $data['id'];
-                $name = $data['name'];
-                $program_id = $data['program_id'];
-                $department_id = $data['department_id'];
-                $row = DB::update('UPDATE book SET `name`=?,program_id=?,department_id=? WHERE id=?',[$name,$program_id,$department_id,$id]);
-            }
-            else{}
         }
     }
 }
