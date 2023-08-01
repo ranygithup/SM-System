@@ -118,13 +118,35 @@ let html = [`<div class="row gy-2">
         </div>
     </div>
     <div class="col-lg-8">
-        <div class="form-group">
-            <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control data-input" data-field="name"/>
-        </div>
-        <div class="form-group mt-3">
-            <label for="description" class="form-label">Description</label>
-            <textarea class="form-control data-input" data-field="description"></textarea>
+        <div class="row row-cols-lg-2 gy-3">
+            <div class="col">
+                <div class="form-group">
+                    <label for="name" class="form-label">Title</label>
+                    <input type="text" class="form-control data-input" data-field="name"/>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="program_id" class="form-label">Program</label>
+                    <div class="width-select-in-form">
+                        <select class="modal-select2 data-input" data-field="program_id"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="department_id" class="form-label">Program</label>
+                    <div class="width-select-in-form">
+                        <select class="modal-select2 data-input" data-field="department_id"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control data-input" data-field="description"></textarea>
+                </div>
+            </div>
         </div>
     </div>
 </div>`].join('');
