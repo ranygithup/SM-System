@@ -1,7 +1,12 @@
 class API{
     async getData(apiUrl) {
         let api = [document.baseURI, apiUrl].join('');
-        const response = await fetch(api);
+        const response = await fetch(api,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
         const data = await response.json();
         return data;
     }

@@ -21,20 +21,91 @@ var BookComponent = new function(){
     }
 
     this.displayBook = (onFinish = null) => {
-        api.getData().then(res => {
+        api.getData('api/book/list').then(res => {
             let data = [];
             if(res.status === 200){
                 data = res.data;
             }
 
+            let cols = [{
+                title: "Name",
+                data: "name"
+            },
+            {
+                title: "Photo",
+                data: (data, a, b) => {
+                    let image = data.image_url ? data.image_url : '';
+                    return [`<img class="tbl-image" src="${image}" alt=""/>`].join('');
+                }
+            },
+            {
+                title: "Program",
+                data: "program"
+            },
+            {
+                title: "Department",
+                data: "department"
+            },
+            {
+                title: "Description",
+                data: "description"
+            },
+            {
+                title: "Action",
+                data: (data, a, b) => {
+                    return [`<div class="d-flex gap-2">
+                        <a href="javascript:void(0)" class="btn-dpm-modify" data-id="${data.id}">
+                            <i class="fa-regular fa-pen-to-square text-warning fs-5"></i>
+                        </a>
+                        <a href="javascript:void(0)" class="btn-dpm-delete" data-id="${data.id}">
+                            <i class="fa-regular fa-trash-can text-danger fs-5"></i>
+                        </a>
+                    </div>`].join('');
+                }
+            }];
+
+            if(mThis.table){
+                mThis.tblBook.DataTable().clear().destroy();
+                mThis.tblBook.empty();
+                mThis.table = null;
+            }
+
+            if(!mThis.table){
+                mThis.table = mThis.tblBook.DataTable({
+                    searching: false,
+                    destroy: true,
+                    paging: true,
+                    ordering: false,
+                    retrive: true,
+                    info: true,
+                    pageLength: 5,
+                    bLengthChange: false,
+                    saveState: true,
+                    processing: true,
+                    language: {
+                        loadingRecords: "&nbsp",
+                        processing: "Loading...",
+                        emptyTable:"No data to display"
+                    },
+                    data: data,
+                    columns: cols,
+                    createdRow: (row, data, dataIndex) => {
+                        let tr = $(row);
+                        tr.data("id", data.id);
+                    }
+                });
+            }
+            
             if(typeof onFinish === 'function') onFinish();
         });
     }
 
     this.show = (options) => {
         if(!options) options = {};
-        main_view.setTitle(mThis.title_prop);
-        mThis.self.show().siblings().hide();
+        mThis.displayBook(() => {
+            main_view.setTitle(mThis.title_prop);
+            mThis.self.show().siblings().hide();
+        });
     }
 }
 

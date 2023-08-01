@@ -12,18 +12,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('department')->group(function(){
     Route::post('/save',[DepartmentController::class,'save']);
-    Route::get('/list',[DepartmentController::class,'list']);
+    Route::post('/list',[DepartmentController::class,'list']);
     Route::post('/delete',[DepartmentController::class,'delete']);
     Route::post('/details',[DepartmentController::class,'details']);
 });
 
 Route::prefix('main-program')->group(function(){
     Route::post('/save',[MainProgramController::class,'save']);
-    Route::get('/list',[MainProgramController::class,'list']);
+    Route::post('/list',[MainProgramController::class,'list']);
     Route::post('/details',[MainProgramController::class,'details']);
     Route::post('/delete',[MainProgramController::class,'delete']);
 });
 
 Route::prefix('book')->group(function(){
     Route::post('/save',[BookController::class,'save']);
+    Route::post('/list',[BookController::class,'list']);
 });

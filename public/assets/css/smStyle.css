@@ -63,3 +63,12 @@
 .bok-dlg-image:hover .image-options{
     display: block;
 }
+
+.table tbody > tr > td{
+    vertical-align : middle;
+}
+
+.tbl-image{
+    width:80px;
+    height:70px;
+}

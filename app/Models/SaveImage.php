@@ -13,10 +13,16 @@ class SaveImage
         $image_name = time().'.'.$image_type;
         $path = $dir.'/'.$image_name;
         Storage::disk('local_public')->put($path, $image_base64);
+        return $image_name;
     }
 
     static function deleteImage($dir, $filename){
         $path = $dir.'/'.$filename;
         Storage::disk('local_public')->delete($path);
+    }
+
+    static function getImage($dir,$filename){
+        $path = asset(Storage::url($dir.'/'.$filename));
+        return $path;
     }
 }
