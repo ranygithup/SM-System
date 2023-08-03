@@ -27,4 +27,7 @@ Route::prefix('main-program')->group(function(){
 Route::prefix('book')->group(function(){
     Route::post('/save',[BookController::class,'save']);
     Route::post('/list',[BookController::class,'list']);
+    Route::post('/details',[BookController::class,'details']);
+    Route::post('/delete',[BookController::class,'delete']);
+    Route::post('/get-options',[BookController::class,'getOptions']);
 });

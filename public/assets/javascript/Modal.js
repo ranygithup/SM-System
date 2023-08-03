@@ -97,6 +97,10 @@ class Modal{
     setDataForm = (d) => {
         d = d ? d : {};
 
+        if(this.image){
+            this.setImage($(`#${this.id}`), d.image_url);
+        }
+
         $(`#${this.id}`).find('.data-input').each(function(){
             let el = $(this);
             let f = el.data('field');
@@ -114,6 +118,30 @@ class Modal{
                 data = res.data;
             }
             this.setDataForm(data);
+        });
+    }
+
+    setImage = (con, image) => {
+        let btn_image = this.image;
+        let btn_delete = [this.image,'_delete'].join('');
+
+        let div = con.find(`#${btn_image}`).parent();
+
+        let html = [`<image class="w-100 h-100 rounded-3 data-input" src="${image}" alt="" data-field="photo"/>
+        <div class="image-options">
+            <i id="${btn_delete}" class="fa-regular fa-trash-can text-danger fs-5"></i>
+        </div>`].join('')
+
+        div.html(html);
+        div.find(`#${btn_delete}`).on('click',(e) => {
+            e.preventDefault();
+            let container_image = $(`#${btn_delete}`).closest('.bok-dlg-image');
+
+            container_image.html([`<div id="${btn_image}" class="bok-dlg-image-empty">
+                <i class="fa-regular fa-image text-muted fs-3"></i>
+            </div>`].join(''));
+
+            this.imageRender(con);
         });
     }
 

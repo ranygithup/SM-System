@@ -16,7 +16,40 @@ var BookComponent = new function(){
                     mThis.displayBook();
                 }
             };
-            book.show(op);
+            prepareFormOption((html) => {
+                book.html = html;
+                book.show(op);
+            });
+        });
+
+        mThis.tblBook.on('click','a.btn-dpm-modify',function(e){
+            e.preventDefault();
+            let op = {
+                'id': $(this).data('id'),
+                'onClose': () => {
+                    mThis.displayBook();
+                }
+            };
+            
+            prepareFormOption((html) => {
+                book.html = html;
+                book.show(op);
+            });
+        });
+
+        mThis.tblBook.on('click','a.btn-dpm-delete',function(e){
+            e.preventDefault();
+            let op = {
+                'id': $(this).data('id')
+            };
+
+            interact.confirm('Delete this book?',() => {
+                api.postData('api/book/delete',op).then(res => {
+                    if(res.status === 200){
+                        mThis.displayBook();
+                    }
+                });
+            });
         });
     }
 
@@ -109,55 +142,76 @@ var BookComponent = new function(){
     }
 }
 
-let html = [`<div class="row gy-2">
-    <div class="col-lg-4">
-        <div class="bok-dlg-image">
-            <div id="bok_dlg_empty" class="bok-dlg-image-empty">
-                <i class="fa-regular fa-image text-muted fs-3"></i>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-8">
-        <div class="row row-cols-lg-2 gy-3">
-            <div class="col">
-                <div class="form-group">
-                    <label for="name" class="form-label">Title</label>
-                    <input type="text" class="form-control data-input" data-field="name"/>
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-                    <label for="program_id" class="form-label">Program</label>
-                    <div class="width-select-in-form">
-                        <select class="modal-select2 data-input" data-field="program_id"></select>
+let prepareFormOption = (onFinish = null) => {
+    let html = null, program = null, department = null;
+
+    api.getData('api/book/get-options').then(res => {
+        let d = {};
+        if(res.status === 200){
+            d = res.data;
+        }
+        
+        html = [`<div class="row gy-2">
+            <div class="col-lg-4">
+                <div class="bok-dlg-image">
+                    <div id="bok_dlg_empty" class="bok-dlg-image-empty">
+                        <i class="fa-regular fa-image text-muted fs-3"></i>
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="form-group">
-                    <label for="department_id" class="form-label">Program</label>
-                    <div class="width-select-in-form">
-                        <select class="modal-select2 data-input" data-field="department_id"></select>
+            <div class="col-lg-8">
+                <div class="row row-cols-lg-2 gy-3">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Title</label>
+                            <input type="text" class="form-control data-input" data-field="name"/>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="program_id" class="form-label">Program</label>
+                            <div class="width-select-in-form">
+                                <select class="modal-select2 data-input" data-field="program_id">
+                                    ${program, d && d.programs.map(option => {
+                                        program = [program, `<option value="${option.id}">${option.name}</option>`].join('')
+                                    }),program}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="department_id" class="form-label">Department</label>
+                            <div class="width-select-in-form">
+                                <select class="modal-select2 data-input" data-field="department_id">
+                                    ${department, d && d.departments.map(option => {
+                                        department = [department, `<option value="${option.id}">${option.name}</option>`].join('')
+                                    }),department}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control data-input" data-field="description"></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="form-group">
-                    <label for="description" class="form-label">Description</label>
-                    <textarea class="form-control data-input" data-field="description"></textarea>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>`].join('');
+        </div>`].join('');
+
+        if(typeof onFinish === 'function') onFinish(html);
+    });
+}
 
 const book = new Modal({
     id: 'dlg_bok_',
     title: 'Book',
     class_name: 'modal-lg',
     image: 'bok_dlg_empty',
-    html: html,
-    api_save:'api/book/save'
+    api_save:'api/book/save',
+    api_modify: 'api/book/details'
 });
 
 window.addEventListener('DOMContentLoaded',() => {
