@@ -97,7 +97,7 @@ class Modal{
     setDataForm = (d) => {
         d = d ? d : {};
 
-        if(this.image){
+        if(this.image && d.image_url){
             this.setImage($(`#${this.id}`), d.image_url);
         }
 
@@ -126,6 +126,13 @@ class Modal{
         let btn_delete = [this.image,'_delete'].join('');
 
         let div = con.find(`#${btn_image}`).parent();
+        this.isUrl(image, (d) => {
+            if(d){
+                this.convertImageToBase64(image,(base64) => {
+                    this.photo = base64;
+                });
+            }
+        });
 
         let html = [`<image class="w-100 h-100 rounded-3 data-input" src="${image}" alt="" data-field="photo"/>
         <div class="image-options">
@@ -173,6 +180,26 @@ class Modal{
                 });
             });
         });
+    }
+
+    convertImageToBase64 = (url, callback) => {
+        let image = new Image();
+        image.crossOrigin = 'anonymous';
+        image.onload = function(){
+            const canvas = document.createElement('canvas');
+            canvas.width = this.naturalWidth;
+            canvas.height = this.naturalHeight;
+            canvas.getContext('2d').drawImage(this, 0, 0);
+            const dataUrl = canvas.toDataURL('image/png');
+            callback && callback(dataUrl);
+            canvas.remove();
+        };
+        image.src = url;
+    }
+
+    isUrl = (url, callback) => {
+        const urlRegex = /^(https?|ftp):\/\/[^\s/$.?].[^\s]*$/i;
+        callback && callback(urlRegex.test(url));
     }
 
     show = (op) => {

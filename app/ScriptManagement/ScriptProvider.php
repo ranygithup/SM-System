@@ -21,6 +21,7 @@
                 'assets/components/DashboardComponent.js',
                 'assets/components/DepartmentComponent.js',
                 'assets/components/MainProgramComponent.js',
+                'assets/components/LevelComponent.js',
                 'assets/components/BookComponent.js'
             );
 

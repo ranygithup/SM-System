@@ -16,7 +16,7 @@ var BookComponent = new function(){
                     mThis.displayBook();
                 }
             };
-            prepareFormOption((html) => {
+            prepareBook((html) => {
                 book.html = html;
                 book.show(op);
             });
@@ -31,7 +31,7 @@ var BookComponent = new function(){
                 }
             };
             
-            prepareFormOption((html) => {
+            prepareBook((html) => {
                 book.html = html;
                 book.show(op);
             });
@@ -142,7 +142,7 @@ var BookComponent = new function(){
     }
 }
 
-let prepareFormOption = (onFinish = null) => {
+let prepareBook = (onFinish = null) => {
     let html = null, program = null, department = null;
 
     api.getData('api/book/get-options').then(res => {
@@ -172,7 +172,7 @@ let prepareFormOption = (onFinish = null) => {
                             <label for="program_id" class="form-label">Program</label>
                             <div class="width-select-in-form">
                                 <select class="modal-select2 data-input" data-field="program_id">
-                                    ${program, d && d.programs.map(option => {
+                                    ${d && d.programs.map(option => {
                                         program = [program, `<option value="${option.id}">${option.name}</option>`].join('')
                                     }),program}
                                 </select>
@@ -184,9 +184,9 @@ let prepareFormOption = (onFinish = null) => {
                             <label for="department_id" class="form-label">Department</label>
                             <div class="width-select-in-form">
                                 <select class="modal-select2 data-input" data-field="department_id">
-                                    ${department, d && d.departments.map(option => {
+                                    ${d && d.departments.map(option => {
                                         department = [department, `<option value="${option.id}">${option.name}</option>`].join('')
-                                    }),department}
+                                    }), department}
                                 </select>
                             </div>
                         </div>

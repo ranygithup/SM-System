@@ -66,7 +66,7 @@ class Book{
     }
 
     function list(){
-        $rows = DB::table('book as b')->join('main_program as m','m.id','=','b.program_id')->join('department as d','d.id','=','b.department_id')->selectRaw('b.id,b.name,b.description,b.photo_file_name,m.name as program,d.name as department')->get();
+        $rows = DB::table($this->tbl.' as b')->join('main_program as m','m.id','=','b.program_id')->join('department as d','d.id','=','b.department_id')->selectRaw('b.id,b.name,b.description,b.photo_file_name,m.name as program,d.name as department')->get();
         foreach($rows as $row){
             $row->image_url = SaveImage::getImage($this->dir,$row->photo_file_name);
             unset($row->photo_file_name);
@@ -79,7 +79,7 @@ class Book{
     }
 
     function details($id){
-        $row = DB::table($this->tbl)->where('id',$id)->selectRaw('id,name,description,program_id,department_id,photo_file_name')->get()->first();
+        $row = DB::table($this->tbl)->where('id',$id)->selectRaw('id,name,description,program_id,department_id,photo_file_name')->first();
         
         $row->image_url = SaveImage::getImage($this->dir,$row->photo_file_name);
         unset($row->photo_file_name);

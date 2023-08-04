@@ -60,7 +60,7 @@ class Department
   }
 
   function details($id){
-    $row = DB::table($this->tbl)->where('id',$id)->selectRaw('id,name')->get()->first();
+    $row = DB::table($this->tbl)->where('id',$id)->selectRaw('id,name')->first();
     return response()->json([
       'status' => 200,
       'data' => $row

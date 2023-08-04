@@ -2,27 +2,27 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-use Exception;
 
-class MainProgram
+class Level
 {
-    protected $tbl = 'main_program';
+    protected $tbl = 'level';
 
     function save($data){
         $rules = [
             'id' => 'numeric',
-            'name' => 'required|string|min:3|max:255',
+            'name' => 'required|string|min:5|max:150',
+            'program_id' => 'required|numeric',
             'department_id' => 'required|numeric'
         ];
 
-        $validator = Validator::make($data, $rules);
+        $validator = Validator::make($data,$rules);
 
-        if($validator->fails())
-        {
+        if($validator->fails()){
             return response()->json([
-                'status' => 404,
+                'status' => 200,
                 'error_message' => $validator->messages()
             ]);
         }
@@ -31,19 +31,21 @@ class MainProgram
                 if($data['id'] > 0){
                     DB::table($this->tbl)->where('id',$data['id'])->update([
                         'name' => $data['name'],
+                        'program_id' => $data['program_id'],
                         'department_id' => $data['department_id']
                     ]);
                 }
                 else{
                     DB::table($this->tbl)->insert([
                         'name' => $data['name'],
+                        'program_id' => $data['program_id'],
                         'department_id' => $data['department_id']
                     ]);
                 }
 
                 return response()->json([
                     'status' => 200,
-                    'data' => "Main Program Added"
+                    'data' => 'Level Added'
                 ]);
             }
             catch(Exception $e){
@@ -56,7 +58,7 @@ class MainProgram
     }
 
     function list(){
-        $rows = DB::table($this->tbl.' as m')->join('department as d','m.department_id','=','d.id')->selectRaw('m.id,m.name,d.name as department,m.created_at')->get();
+        $rows = DB::table($this->tbl.' as l')->join('main_program as m','m.id','=','l.program_id')->join('department as d','d.id','=','l.department_id')->selectRaw('l.id,l.name,m.name as program,d.name as department')->get();
 
         return response()->json([
             'status' => 200,
@@ -65,7 +67,7 @@ class MainProgram
     }
 
     function details($id){
-        $row = DB::table($this->tbl)->where('id',$id)->selectRaw('id,name,department_id,created_at')->first();
+        $row = DB::table($this->tbl)->where('id',$id)->selectRaw('id,name,program_id,department_id')->first();
 
         return response()->json([
             'status' => 200,
@@ -78,7 +80,7 @@ class MainProgram
         
         return response()->json([
             'status' => 200,
-            'data' => 'Delete Successfully!'
+            'message' => 'Deleted Successfully!'
         ]);
     }
 }

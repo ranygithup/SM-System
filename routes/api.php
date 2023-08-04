@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\MainProgramController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\LevelController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -30,4 +31,11 @@ Route::prefix('book')->group(function(){
     Route::post('/details',[BookController::class,'details']);
     Route::post('/delete',[BookController::class,'delete']);
     Route::post('/get-options',[BookController::class,'getOptions']);
+});
+
+Route::prefix('level')->group(function(){
+    Route::post('/save',[LevelController::class,'save']);
+    Route::post('/list',[LevelController::class,'list']);
+    Route::post('/details',[LevelController::class,'details']);
+    Route::post('/delete',[LevelController::class,'delete']);
 });
