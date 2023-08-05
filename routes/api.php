@@ -6,6 +6,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\MainProgramController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\ServicesController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -38,4 +39,11 @@ Route::prefix('level')->group(function(){
     Route::post('/list',[LevelController::class,'list']);
     Route::post('/details',[LevelController::class,'details']);
     Route::post('/delete',[LevelController::class,'delete']);
+});
+
+Route::prefix('service')->group(function(){
+    Route::post('/save',[ServicesController::class,'save']);
+    Route::post('/list',[ServicesController::class,'list']);
+    Route::post('/details',[ServicesController::class,'details']);
+    Route::post('/delete',[ServicesController::class,'delete']);
 });
