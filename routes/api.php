@@ -7,6 +7,7 @@ use App\Http\Controllers\MainProgramController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\CertificateController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -46,4 +47,9 @@ Route::prefix('service')->group(function(){
     Route::post('/list',[ServicesController::class,'list']);
     Route::post('/details',[ServicesController::class,'details']);
     Route::post('/delete',[ServicesController::class,'delete']);
+});
+
+Route::prefix('certificate')->group(function(){
+    Route::post('/save',[CertificateController::class,'save']);
+    Route::post('/list',[CertificateController::class,'list']);
 });

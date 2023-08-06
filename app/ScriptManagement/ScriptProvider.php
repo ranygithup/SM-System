@@ -23,7 +23,8 @@
                 'assets/components/MainProgramComponent.js',
                 'assets/components/LevelComponent.js',
                 'assets/components/ServicesComponent.js',
-                'assets/components/BookComponent.js'
+                'assets/components/BookComponent.js',
+                'assets/components/CertificateComponent.js'
             );
 
             $scripts = array(

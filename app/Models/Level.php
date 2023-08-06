@@ -13,7 +13,7 @@ class Level
     function save($data){
         $rules = [
             'id' => 'numeric',
-            'name' => 'required|string|min:5|max:150',
+            'name' => 'required|string|min:1|max:150',
             'program_id' => 'required|numeric',
             'department_id' => 'required|numeric'
         ];

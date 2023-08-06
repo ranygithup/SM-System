@@ -5,4 +5,5 @@
     @include('layouts.levelComponent')
     @include('layouts.servicesComponent')
     @include('layouts.bookComponent')
+    @include('layouts.certificateComponent')
 </div>
