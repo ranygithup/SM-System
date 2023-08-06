@@ -16,4 +16,14 @@ class CertificateController extends Controller
         $certificate = new Certificate();
         return $certificate->list();
     }
+
+    function details(Request $req){
+        $certificate = new Certificate();
+        return $certificate->details($req->id);
+    }
+
+    function delete(Request $req){
+        $certificate = new Certificate();
+        return $certificate->delete($req->id);
+    }
 }

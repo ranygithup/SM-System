@@ -5,8 +5,45 @@ var CertificateComponent = new function(){
     this.self = $('#_main_certificateComponent');
 
     this.tblCertificte = mThis.self.find('#_ctf_tbl');
+    this.btnNew = mThis.self.find('#_ctf_btn_new');
 
-    this.init = () => {}
+    this.init = () => {
+        mThis.btnNew.on('click',function(e){
+            e.preventDefault();
+            let op = {
+                'id': 0,
+                'onClose': () => {
+                    mThis.displayCertificate();
+                }
+            };
+            certificate.show(op);
+        });
+
+        mThis.tblCertificte.on('click','a.btn-ctf-modify',function(e){
+            e.preventDefault();
+            let op = {
+                'id': $(this).data('id'),
+                'onClose': () => {
+                    mThis.displayCertificate();
+                }
+            };
+            certificate.show(op);
+        });
+
+        mThis.tblCertificte.on('click','a.btn-ctf-delete',function(e){
+            e.preventDefault();
+            let op = {
+                'id': $(this).data('id')
+            };
+            interact.confirm('Delete this certificate?',() => {
+                api.postData('api/certificate/delete',op).then(res => {
+                    if(res.status === 200){
+                        mThis.displayCertificate();
+                    }
+                });
+            });
+        });
+    }
 
     this.displayCertificate = (onFinish = null) => {
         api.getData('api/certificate/list').then(res => {
@@ -23,7 +60,7 @@ var CertificateComponent = new function(){
                 title: "Photo",
                 data: (data, a, b) => {
                     let image = data.image_url ? data.image_url : '';
-                    return [`<img class="" src="${image}" alt=""/>`].join('');
+                    return [`<img class="tbl-image" src="${image}" alt=""/>`].join('');
                 }
             },
             {
@@ -89,6 +126,34 @@ var CertificateComponent = new function(){
     }
 }
 
-window.addEventListener('DOMContentLoaded', () => {
+const certificate = new Modal({
+    id: 'dlg_ctf_',
+    title: 'Certificate',
+    class_name: 'modal-lg',
+    html: [`<div class="row gy-2">
+        <div class="col-lg-4">
+            <div class="bok-dlg-image">
+                <div id="ctf_dlg_empty" class="bok-dlg-image-empty">
+                    <i class="fa-regular fa-image text-muted fs-3"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="form-group">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control data-input" data-field="name"/>
+            </div>
+            <div class="form-group mt-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control data-input" data-field="description"></textarea>
+            </div>
+        </div>
+    </div>`].join(''),
+    image: 'ctf_dlg_empty',
+    api_save: 'api/certificate/save',
+    api_modify: 'api/certificate/details'
+});
+
+window.addEventListener('DOMContentLoaded',() => {
     CertificateComponent.init();
 });

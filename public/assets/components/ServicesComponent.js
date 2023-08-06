@@ -119,15 +119,13 @@ var ServicesComponent = new function(){
     }
 }
 
-let html = [`<div class="form-group">
-    <label for="name" class="form-label">Name</label>
-    <input type="text" class="form-control data-input" data-field="name"/>
-</div>`].join('');
-
 const service = new Modal({
     id: "dlg_svc_",
     title: "Service",
-    html: html,
+    html: [`<div class="form-group">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control data-input" data-field="name"/>
+    </div>`].join(''),
     api_save: "api/service/save",
     api_modify: "api/service/details"
 });
