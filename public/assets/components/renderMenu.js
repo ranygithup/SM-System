@@ -51,12 +51,12 @@ window.addEventListener('DOMContentLoaded', () => {
             'sub_menu':[
                 {
                     "name":"Students",
-                    "component":"StudentUniformComponent",
+                    "component":"UniformStudentComponent",
                     "icon":"uniform.png"
                 },
                 {
                     "name":"Teacher",
-                    "component":"TeacherUniformComponent",
+                    "component":"UniformTeacherComponent",
                     "icon":"uniform.png"
                 }
             ]

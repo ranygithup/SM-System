@@ -8,7 +8,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\CertificateController;
-use App\Models\Certificate;
+use App\Http\Controllers\UniformStudentController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -55,4 +55,11 @@ Route::prefix('certificate')->group(function(){
     Route::post('/list',[CertificateController::class,'list']);
     Route::post('/details',[CertificateController::class,'details']);
     Route::post('/delete',[CertificateController::class,'delete']);
+});
+
+Route::prefix('uniform-student')->group(function(){
+    Route::post('/save',[UniformStudentController::class,'save']);
+    Route::post('/list',[UniformStudentController::class,'list']);
+    Route::post('/details',[UniformStudentController::class,'details']);
+    Route::post('/delete',[UniformStudentController::class,'delete']);
 });
