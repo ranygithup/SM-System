@@ -25,7 +25,8 @@
                 'assets/components/ServicesComponent.js',
                 'assets/components/BookComponent.js',
                 'assets/components/CertificateComponent.js',
-                'assets/components/UniformStudentComponent.js'
+                'assets/components/UniformStudentComponent.js',
+                'assets/components/UniformTeacherComponent.js'
             );
 
             $scripts = array(

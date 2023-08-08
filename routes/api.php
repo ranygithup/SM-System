@@ -9,6 +9,8 @@ use App\Http\Controllers\LevelController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\UniformStudentController;
+use App\Http\Controllers\UniformTeacherController;
+use App\Models\UniformTeacher;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -62,4 +64,11 @@ Route::prefix('uniform-student')->group(function(){
     Route::post('/list',[UniformStudentController::class,'list']);
     Route::post('/details',[UniformStudentController::class,'details']);
     Route::post('/delete',[UniformStudentController::class,'delete']);
+});
+
+Route::prefix('uniform-teacher')->group(function(){
+    Route::post('/save',[UniformTeacherController::class,'save']);
+    Route::post('/list',[UniformTeacherController::class,'list']);
+    Route::post('/details',[UniformTeacherController::class,'details']);
+    Route::post('/delete',[UniformTeacherController::class,'delete']);
 });

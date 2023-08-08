@@ -7,4 +7,5 @@
     @include('layouts.bookComponent')
     @include('layouts.certificateComponent')
     @include('layouts.uniformStudentComponent')
+    @include('layouts.uniformTeacherComponent')
 </div>

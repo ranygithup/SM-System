@@ -2,7 +2,7 @@
 var UniformStudentComponent = new function(){
     let mThis = this;
     this.title_prop = "Uniform Student";
-    this.self = $('#_main_uniformStudentComponent');
+    this.self = $('#_main_ufm_StudentComponent');
 
     this.tblUniformStudent = mThis.self.find('#_ufsd_tbl');
     this.btnNew = mThis.self.find('#_ufsd_btn_new');
