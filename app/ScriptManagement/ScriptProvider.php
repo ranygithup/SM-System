@@ -1,6 +1,8 @@
 <?php
     namespace App\ScriptManagement;
 
+    use Illuminate\Support\Facades\File;
+
     class ScriptProvider{
         static function render(){
             $url = '';
@@ -11,32 +13,14 @@
                 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js',
                 'https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js',
                 'https://cdn.jsdelivr.net/npm/chart.js',
-                'https://cdn.jsdelivr.net/npm/sweetalert2@11',
-                'assets/javascript/api.js',
-                'assets/javascript/confirm.js',
-                'assets/javascript/initializeSelect2.js'
+                'https://cdn.jsdelivr.net/npm/sweetalert2@11'
             );
 
-            $components_load = array(
-                'assets/components/DashboardComponent.js',
-                'assets/components/DepartmentComponent.js',
-                'assets/components/MainProgramComponent.js',
-                'assets/components/LevelComponent.js',
-                'assets/components/ServicesComponent.js',
-                'assets/components/BookComponent.js',
-                'assets/components/CertificateComponent.js',
-                'assets/components/UniformStudentComponent.js',
-                'assets/components/UniformTeacherComponent.js'
-            );
-
-            $scripts = array(
-                'assets/components/menuList.js',
-                'assets/javascript/layout.js',
-                'assets/javascript/modal.js',
-                'assets/components/renderMenu.js',
-                'assets/javascript/fileChooser.js'
-            );
-
+            $scripts_load_local = File::allFiles('assets/load_defer');
+            $scripts_load = array_merge($scripts_load,$scripts_load_local);
+            $components_load = File::allFiles('assets/components');
+            $scripts = File::allFiles('assets/javascript');
+            
             foreach(array($scripts_load, $components_load) as $script){
                 foreach($script as $cdn){
                     $url .= '<script defer language="javascript" type="text/javascript" src="'.$cdn.'"></script>';

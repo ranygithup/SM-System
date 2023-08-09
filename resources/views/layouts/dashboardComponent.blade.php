@@ -3,7 +3,7 @@
         <div class="col">
             <div class="d-flex p-3 bg-white rounded-3">
                 <div class="d-flex align-items-center flex-column w-50">
-                    <img class="db_icons_" src="{{ asset('icons/students.png') }}" alt=""/>
+                    <img class="db_icons_" src="icons/students.png" alt=""/>
                     <p class="pb-0 m-0 mt-2 fw-bold">Students</p>
                 </div>
                 <div class="vr mx-3"></div>
@@ -15,7 +15,7 @@
         <div class="col">
             <div class="d-flex p-3 bg-white rounded-3">
                 <div class="d-flex align-items-center flex-column w-50">
-                    <img class="db_icons_" src="{{ asset('icons/teacher.png') }}" alt=""/>
+                    <img class="db_icons_" src="icons/teacher.png" alt=""/>
                     <p class="pb-0 m-0 mt-2 fw-bold">Teachers</p>
                 </div>
                 <div class="vr mx-3"></div>
@@ -27,7 +27,7 @@
         <div class="col">
             <div class="d-flex p-3 bg-white rounded-3">
                 <div class="d-flex align-items-center flex-column w-50">
-                    <img class="db_icons_" src="{{ asset('icons/parent.png') }}" alt=""/>
+                    <img class="db_icons_" src="icons/parent.png" alt=""/>
                     <p class="pb-0 m-0 mt-2 fw-bold">Parents</p>
                 </div>
                 <div class="vr mx-3"></div>
@@ -39,7 +39,7 @@
         <div class="col">
             <div class="d-flex p-3 bg-white rounded-3">
                 <div class="d-flex align-items-center flex-column w-50">
-                    <img class="db_icons_" src="{{ asset('icons/total_earning.png') }}" alt=""/>
+                    <img class="db_icons_" src="icons/total_earning.png" alt=""/>
                     <p class="pb-0 m-0 mt-2 fw-bold">Total Earnings</p>
                 </div>
                 <div class="vr mx-3"></div>
@@ -60,7 +60,7 @@
                 <div class="col">
                     <div class="p-3 bg-white rounded-3">
                         <div class="w-100">
-                            <img class="db_icons_" src="{{ asset('icons/facebook.png') }}" alt=""/>
+                            <img class="db_icons_" src="icons/facebook.png" alt=""/>
                         </div>
                         <div class="d-flex align-items-center mt-3">
                             <div class="w-50">
@@ -77,7 +77,7 @@
                 <div class="col">
                     <div class="p-3 bg-white rounded-3">
                         <div class="w-100">
-                            <img class="db_icons_" src="{{ asset('icons/telegram.png') }}" alt=""/>
+                            <img class="db_icons_" src="icons/telegram.png" alt=""/>
                         </div>
                         <div class="d-flex align-items-center mt-3">
                             <div class="w-50">
@@ -94,7 +94,7 @@
                 <div class="col">
                     <div class="p-3 bg-white rounded-3">
                         <div class="w-100">
-                            <img class="db_icons_" src="{{ asset('icons/tiktok.png') }}" alt=""/>
+                            <img class="db_icons_" src="icons/tiktok.png" alt=""/>
                         </div>
                         <div class="d-flex align-items-center mt-3">
                             <div class="w-50">
@@ -111,7 +111,7 @@
                 <div class="col">
                     <div class="p-3 bg-white rounded-3">
                         <div class="w-100">
-                            <img class="db_icons_" src="{{ asset('icons/instagram.png') }}" alt=""/>
+                            <img class="db_icons_" src="icons/instagram.png" alt=""/>
                         </div>
                         <div class="d-flex align-items-center mt-3">
                             <div class="w-50">
