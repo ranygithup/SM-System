@@ -5,7 +5,8 @@
 
     class ScriptProvider{
         static function render(){
-            $url = '';
+            $url = ''; $primary = ''; $secondary = '';
+
             $scripts_load = array(
                 'https://code.jquery.com/jquery-3.7.0.min.js',
                 'https://code.jquery.com/ui/1.13.2/jquery-ui.js',
@@ -17,20 +18,37 @@
             );
 
             $scripts_load_local = File::allFiles('assets/load_defer');
-            $scripts_load = array_merge($scripts_load,$scripts_load_local);
             $components_load = File::allFiles('assets/components');
-            $scripts = File::allFiles('assets/javascript');
+            $components_load = array_merge($components_load,$scripts_load_local);
             
-            foreach(array($scripts_load, $components_load) as $script){
-                foreach($script as $cdn){
-                    $url .= '<script defer language="javascript" type="text/javascript" src="'.$cdn.'"></script>';
-                }
+            foreach($components_load as $file){
+                $primary .= file_get_contents($file);
             }
+            file_put_contents('assets/dist/primary.min.js', $primary);
+            self::class::minify_file('assets/dist/primary.min.js');
 
-            foreach($scripts as $cdn){
-                $url .= '<script language="javascript" type="text/javascript" src="'.$cdn.'"></script>';
+            $scripts = File::allFiles('assets/javascript');
+            foreach ($scripts as $file){
+                $secondary .= file_get_contents($file);
             }
+            file_put_contents('assets/dist/secondary.min.js', $secondary);
+            self::minify_file('assets/dist/secondary.min.js');
+
+            foreach($scripts_load as $file){
+                $url .= '<script defer language="javascript" type="text/javascript" src="'.$file.'"></script>';
+            }
+            
+            $url .= '<script defer language="javascript" type="text/javascript" src="assets/dist/primary.min.js"></script>
+            <script language="javascript" type="text/javascript" src="assets/dist/secondary.min.js"></script>';
             echo $url;
+        }
+
+        static function minify_file($file_path){
+            $content = file_get_contents($file_path);
+            $content = preg_replace('/\/\*.*?\*\/|\/\/.*(?=[\n\r])/', '', $content);
+            $content = preg_replace('/\s+/', ' ', $content);
+            $content = trim($content);
+            file_put_contents($file_path, $content);
         }
     }
 ?>

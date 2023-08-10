@@ -43,7 +43,7 @@ var DepartmentComponent = new function(){
                 });
             });
         });
-    }
+    };
 
     this.displayDepartment = (onFinish = null) => {
         api.getData('api/department/list').then(res => {
@@ -115,7 +115,7 @@ var DepartmentComponent = new function(){
 
             if(typeof onFinish === 'function') onFinish();
         });
-    }
+    };
 
     this.show = (options) => {
         if(!options) options = {};
@@ -123,8 +123,8 @@ var DepartmentComponent = new function(){
             main_view.setTitle(mThis.title_prop);
             mThis.self.show().siblings().hide();
         });
-    }
-}
+    };
+};
 
 const department = new Modal({
     id: 'dlg_dpm',

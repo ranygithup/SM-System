@@ -51,7 +51,7 @@ var BookComponent = new function(){
                 });
             });
         });
-    }
+    };
 
     this.displayBook = (onFinish = null) => {
         api.getData('api/book/list').then(res => {
@@ -131,7 +131,7 @@ var BookComponent = new function(){
             
             if(typeof onFinish === 'function') onFinish();
         });
-    }
+    };
 
     this.show = (options) => {
         if(!options) options = {};
@@ -139,8 +139,8 @@ var BookComponent = new function(){
             main_view.setTitle(mThis.title_prop);
             mThis.self.show().siblings().hide();
         });
-    }
-}
+    };
+};
 
 let prepareBook = (onFinish = null) => {
     let html = null, program = null, department = null;
@@ -203,7 +203,7 @@ let prepareBook = (onFinish = null) => {
 
         if(typeof onFinish === 'function') onFinish(html);
     });
-}
+};
 
 const book = new Modal({
     id: 'dlg_bok_',

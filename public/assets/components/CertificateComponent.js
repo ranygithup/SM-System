@@ -43,7 +43,7 @@ var CertificateComponent = new function(){
                 });
             });
         });
-    }
+    };
 
     this.displayCertificate = (onFinish = null) => {
         api.getData('api/certificate/list').then(res => {
@@ -115,7 +115,7 @@ var CertificateComponent = new function(){
 
             if(typeof onFinish === 'function') onFinish();
         });
-    }
+    };
 
     this.show = (options) => {
         if(!options) options = {};
@@ -123,8 +123,8 @@ var CertificateComponent = new function(){
             main_view.setTitle(mThis.title_prop);
             mThis.self.show().siblings().hide();
         });
-    }
-}
+    };
+};
 
 const certificate = new Modal({
     id: 'dlg_ctf_',

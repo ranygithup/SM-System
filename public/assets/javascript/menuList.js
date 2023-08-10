@@ -2,8 +2,8 @@ class MainView{
     setTitle = (title_prop) => {
         let title = $('#screen_title');
         title.text(title_prop);
-    }
-}
+    };
+};
 const main_view = new MainView();
 
 class Menu{
@@ -11,7 +11,7 @@ class Menu{
         this.id = id;
         this.menu = list_menu;
         this.renderMenu();
-    }
+    };
 
     renderMenu = () => {
         let html = ['<ul>'].join('');
@@ -70,5 +70,5 @@ class Menu{
                 $(this).toggleClass('dropdown-open').siblings().removeClass(['dropdown-open','menu-selected']);
             }
         });
-    }
-}
+    };
+};

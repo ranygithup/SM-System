@@ -29,7 +29,7 @@ var MainProgramComponent = new function(){
                 'onClose': () => {
                     mThis.displayMainProgram();
                 }
-            }
+            };
             loadFormOption((html) => {
                 main_program.html = html;
                 main_program.show(op);
@@ -40,7 +40,7 @@ var MainProgramComponent = new function(){
             e.preventDefault();
             let op = {
                 'id': $(this).data('id')
-            }
+            };
             interact.confirm('Delete this main program?',() => {
                 api.postData('api/main-program/delete',op).then(res => {
                     if(res.status === 200){
@@ -49,7 +49,7 @@ var MainProgramComponent = new function(){
                 });
             });
         });
-    }
+    };
 
     this.displayMainProgram = (onFinish = null) => {
         api.getData('api/main-program/list').then(res => {
@@ -125,7 +125,7 @@ var MainProgramComponent = new function(){
 
             if(typeof onFinish === 'function') onFinish();
         });
-    }
+    };
 
     this.show = (options) => {
         if(!options) options = {};
@@ -133,8 +133,8 @@ var MainProgramComponent = new function(){
             main_view.setTitle(mThis.title_prop);
             mThis.self.show().siblings().hide();
         });
-    }
-}
+    };
+};
 
 let loadFormOption = (onFinish = null) => {
     let html = null;
@@ -164,7 +164,7 @@ let loadFormOption = (onFinish = null) => {
 
         if(typeof onFinish === 'function') onFinish(html);
     });
-}
+};
 
 const main_program = new Modal({
     id: "main_program",

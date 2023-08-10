@@ -7,7 +7,7 @@ var DashboardComponent = new function () {
     this.barChart = mThis.self.find('#_db_chart');
     this.elCalendar = mThis.self.find('#_db_calendar');
 
-    this.init = () => {}
+    this.init = () => {};
 
     this.displayBarChart = (onFinish = null) => {
         if (mThis.chart) {
@@ -69,7 +69,7 @@ var DashboardComponent = new function () {
             });
         }
         if(typeof onFinish === 'function') onFinish();
-    }
+    };
 
     this.show = (options) => {
         if (!options) options = {};
@@ -77,8 +77,8 @@ var DashboardComponent = new function () {
             main_view.setTitle(mThis.title_prop);
             mThis.self.show().siblings().hide();
         });
-    }
-}
+    };
+};
 
 window.addEventListener('DOMContentLoaded', () => {
     DashboardComponent.init();

@@ -49,7 +49,7 @@ var LevelComponent = new function(){
                 });
             });
         });
-    }
+    };
 
     this.displayLevel = (onFinish = null) => {
         api.getData('api/level/list').then(res => {
@@ -125,7 +125,7 @@ var LevelComponent = new function(){
 
             if(typeof onFinish === 'function') onFinish();
         });
-    }
+    };
 
     this.show = (options) => {
         if(!options) options = {};
@@ -133,8 +133,8 @@ var LevelComponent = new function(){
             main_view.setTitle(mThis.title_prop);
             mThis.self.show().siblings().hide();
         });
-    }
-}
+    };
+};
 
 let prepareLevel = (onFinish = null) => {
     let html = null, program = null, department = null;
@@ -171,7 +171,7 @@ let prepareLevel = (onFinish = null) => {
 
         if(typeof onFinish === 'function') onFinish(html);
     });
-}
+};
 
 const level = new Modal({
     id: 'dlg_lvl_',

@@ -43,7 +43,7 @@ var UniformTeacherComponent = new function(){
                 });
             });
         });
-    }
+    };
 
     this.displayUniformTeacher = (onFinish = null) => {
         api.getData('api/uniform-teacher/list').then(res => {
@@ -114,7 +114,7 @@ var UniformTeacherComponent = new function(){
             }
             if(typeof onFinish === 'function') onFinish();
         });
-    }
+    };
 
     this.show = (options) => {
         if(!options) options = {};
@@ -122,8 +122,8 @@ var UniformTeacherComponent = new function(){
             main_view.setTitle(mThis.title_prop);
             mThis.self.show().siblings().hide();
         });
-    }
-}
+    };
+};
 
 const uniformTeacher = new Modal({
     id: 'dlg_ufth_',

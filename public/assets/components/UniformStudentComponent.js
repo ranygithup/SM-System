@@ -43,7 +43,7 @@ var UniformStudentComponent = new function(){
                 });
             });
         });
-    }
+    };
 
     this.displayUniformStudent = (onFinish = null) => {
         api.getData('api/uniform-student/list').then(res => {
@@ -115,7 +115,7 @@ var UniformStudentComponent = new function(){
 
             if(typeof onFinish === 'function') onFinish();
         });
-    }
+    };
 
     this.show = (options) => {
         if(!options) options = {};
@@ -123,8 +123,8 @@ var UniformStudentComponent = new function(){
             main_view.setTitle(mThis.title_prop);
             mThis.self.show().siblings().hide();
         });
-    }
-}
+    };
+};
 
 const uniformStudent = new Modal({
     id: 'dlg_ufsd_',

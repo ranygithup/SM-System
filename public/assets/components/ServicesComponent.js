@@ -15,7 +15,7 @@ var ServicesComponent = new function(){
                 'onClose': () => {
                     mThis.displayServices();
                 }
-            }
+            };
             service.show(op);
         });
 
@@ -43,7 +43,7 @@ var ServicesComponent = new function(){
                 });
             });
         });
-    }
+    };
 
     this.displayServices = (onFinish = null) => {
         api.getData('api/service/list').then(res => {
@@ -108,7 +108,7 @@ var ServicesComponent = new function(){
 
             if(typeof onFinish === 'function') onFinish();
         });
-    }
+    };
 
     this.show = (options) => {
         if(!options) options = {};
@@ -116,8 +116,8 @@ var ServicesComponent = new function(){
             main_view.setTitle(mThis.title_prop);
             mThis.self.show().siblings().hide();
         });
-    }
-}
+    };
+};
 
 const service = new Modal({
     id: "dlg_svc_",

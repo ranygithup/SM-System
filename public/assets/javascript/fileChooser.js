@@ -13,18 +13,18 @@ class FileChooser{
             reader.onload = function(e){
                 const dataURL = e.target.result;
                 callback && callback(dataURL);
-            }
+            };
             reader.readAsDataURL(file);
         });
 
         input.click();
         input.remove();
-    }
+    };
 
     chooseFile = (callback) => {
         this.createInput((base64) => {
             callback && callback(base64);
         });
-    }
-}
+    };
+};
 const file = new FileChooser();

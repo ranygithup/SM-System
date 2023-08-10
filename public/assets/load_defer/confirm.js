@@ -18,6 +18,6 @@ class Interact{
             }
         });
     }
-}
+};
 
 const interact = new Interact();

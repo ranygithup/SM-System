@@ -18,7 +18,7 @@ class Modal{
         this.data_id = 0;
         this.onClose = null;
         this.photo = null;
-    }
+    };
 
     renderModal = () => {
         let modal = document.createElement('div');
@@ -79,7 +79,7 @@ class Modal{
                 }
             });
         });
-    }
+    };
 
     getDataForm = () => {
         let p = {
@@ -92,7 +92,7 @@ class Modal{
         });
         p.photo = this.photo;
         return p;
-    }
+    };
 
     setDataForm = (d) => {
         d = d ? d : {};
@@ -109,7 +109,7 @@ class Modal{
             else
                 el.val(d[f]);
         });
-    }
+    };
 
     loadDataDetails = (op) => {
         api.postData(this.api_modify,{'id': op.id}).then(res => {
@@ -119,7 +119,7 @@ class Modal{
             }
             this.setDataForm(data);
         });
-    }
+    };
 
     setImage = (con, image) => {
         let btn_image = this.image;
@@ -137,7 +137,7 @@ class Modal{
         let html = [`<image class="w-100 h-100 rounded-3 data-input" src="${image}" alt="" data-field="photo"/>
         <div class="image-options">
             <i id="${btn_delete}" class="fa-regular fa-trash-can text-danger fs-5"></i>
-        </div>`].join('')
+        </div>`].join('');
 
         div.html(html);
         div.find(`#${btn_delete}`).on('click',(e) => {
@@ -150,7 +150,7 @@ class Modal{
 
             this.imageRender(con);
         });
-    }
+    };
 
     imageRender = (con) => {
         let btn_image = this.image;
@@ -180,7 +180,7 @@ class Modal{
                 });
             });
         });
-    }
+    };
 
     convertImageToBase64 = (url, callback) => {
         let image = new Image();
@@ -195,12 +195,12 @@ class Modal{
             canvas.remove();
         };
         image.src = url;
-    }
+    };
 
     isUrl = (url, callback) => {
         const urlRegex = /^(https?|ftp):\/\/[^\s/$.?].[^\s]*$/i;
         callback && callback(urlRegex.test(url));
-    }
+    };
 
     show = (op) => {
         this.data_id = op.id;
@@ -218,5 +218,5 @@ class Modal{
         }
 
         $(`#${this.id}`).modal('show');
-    }
-}
+    };
+};

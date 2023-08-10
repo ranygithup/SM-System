@@ -23,6 +23,6 @@ class API{
         const data = await response.json();
         return data;
     }
-}
+};
 
 const api = new API();

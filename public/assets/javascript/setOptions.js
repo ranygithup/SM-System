@@ -20,6 +20,6 @@ class Utils{
             elSelect.html(options);
         }
     }
-}
+};
 
 const util = new Utils();
