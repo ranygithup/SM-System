@@ -46,7 +46,7 @@ class UserLogin
     }
 
     function dashboard(){
-        $data = []; $timeout = 1800;
+        $data = [];
         if(Session::has('id')){
             $data = DB::table($this->tbl)->where('id',Session::get('id'))->selectRaw('id,name,password')->first();
         }
