@@ -11,7 +11,7 @@ class UserLogin
 {
     protected $tbl = 'user';
 
-    function registration($data){
+    function login($data){
         $rules = [
             'username' => 'required',
             'password' => 'required|min:8|max:20'

@@ -7,9 +7,9 @@ use App\Models\UserLogin;
 
 class UserController extends Controller
 {
-    function registration(Request $req){
+    function login(Request $req){
         $user = new UserLogin();
-        return $user->registration($req->all());
+        return $user->login($req->all());
     }
 
     function dashboard(){

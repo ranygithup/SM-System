@@ -8,4 +8,4 @@ Route::get('/', function(){
 });
 
 Route::get('/school',[UserController::class,'dashboard']);
-Route::post('/processLogin',[UserController::class,'registration'])->name('login');
+Route::post('/processLogin',[UserController::class,'login'])->name('login');
