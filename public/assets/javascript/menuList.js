@@ -14,6 +14,7 @@ class Menu{
     };
 
     renderMenu = () => {
+        let baseURI = document.location.origin;
         let html = ['<ul>'].join('');
         if(this.menu.length > 0){
             this.menu.map(list => {
@@ -23,7 +24,7 @@ class Menu{
                     list.sub_menu.map(sub_list => {
                         subHtml = [subHtml,`<li data-component="${sub_list.component}" class="menu-clickable">
                             <span class="pe-2">
-                                <img class="mnu_icons_" src="${document.baseURI}icons/${sub_list.icon}" alt=""/>
+                                <img class="mnu_icons_" src="${baseURI}/icons/${sub_list.icon}" alt=""/>
                             </span>
                             <span class="list-menu-title">${sub_list.name}</span>
                         </li>`].join('');
@@ -32,7 +33,7 @@ class Menu{
 
                 html = [html,`<li ${list.component ? `data-component="${list.component}" class="menu-clickable"`:`class="menu-dropdown"`}>
                     <span class="pe-2">
-                        <img class="mnu_icons_" src="${document.baseURI}icons/${list.icon}" alt=""/>
+                        <img class="mnu_icons_" src="${baseURI}/icons/${list.icon}" alt=""/>
                     </span>
                     <span class="list-menu-title">${list.name}</span>
                     ${list.component ? '':`<span class="float-end">

@@ -1,6 +1,6 @@
 class API{
     async getData(apiUrl) {
-        let api = [document.baseURI, apiUrl].join('');
+        let api = [document.location.origin, apiUrl].join('/');
         const response = await fetch(api,{
             method: 'POST',
             headers: {
@@ -12,7 +12,7 @@ class API{
     }
 
     async postData(apiUrl, payLoad){
-        let api = [document.baseURI, apiUrl].join('');
+        let api = [document.location.origin, apiUrl].join('/');
         const response = await fetch(api, {
             method: 'POST',
             headers: {
