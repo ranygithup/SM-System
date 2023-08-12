@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\Models\SaveImage;
+use App\Models\JDV;
 
 class UniformStudent
 {
@@ -23,41 +24,37 @@ class UniformStudent
         $validator = Validator::make($data,$rules);
 
         if($validator->fails()){
-            return response()->json([
-                'status' => 200,
-                'error_message' => $validator->messages()
-            ]);
+            return JDV::error(404,$validator->message());
         }
         else{
             try{
                 if($data['id'] > 0){
                     $filename = DB::table($this->tbl)->where('id',$data['id'])->value('photo_file_name');
-                    SaveImage::deleteImage($this->dir,$filename);
+                    if($filename)
+                        $del = SaveImage::deleteImage($this->dir,$filename);
 
-                    DB::table($this->tbl)->update([
-                        'sex' => $data['sex'],
-                        'description'=> $data['description'],
-                        'photo_file_name' => SaveImage::saveImage($this->dir,$data['photo'])
-                    ]);
+                    if($del){
+                        $row = DB::table($this->tbl)->update([
+                            'sex' => $data['sex'],
+                            'description'=> $data['description'],
+                            'photo_file_name' => SaveImage::saveImage($this->dir,$data['photo'])
+                        ]);
+
+                        return JDV::depend($row,'Uniform Student Updated!');
+                    }
                 }
                 else{
-                    DB::table($this->tbl)->insert([
+                    $row = DB::table($this->tbl)->insert([
                         'sex' => $data['sex'],
                         'description'=> $data['description'],
                         'photo_file_name' => SaveImage::saveImage($this->dir,$data['photo'])
                     ]);
-                }
 
-                return response()->json([
-                    'status' => 200,
-                    'message' => 'Uniform Student Added'
-                ]);
+                    return JDV::depend($row,'Uniform Student Added!');
+                }
             }
             catch(Exception $e){
-                return response()->json([
-                    'status' => 500,
-                    'error_message' => 'Something went wrong'
-                ]);
+                return JDV::error(500,'Something went wrong!');
             }
         }
     }
@@ -69,10 +66,7 @@ class UniformStudent
             unset($row->photo_file_name);
         }
 
-        return response()->json([
-            'status' => 200,
-            'data' => $rows
-        ]);
+        return JDV::result($rows);
     }
 
     function details($id){
@@ -80,20 +74,14 @@ class UniformStudent
         $row->image_url = SaveImage::getImage($this->dir,$row->photo_file_name);
         unset($row->photo_file_name);
 
-        return response()->json([
-            'status' => 200,
-            'data' => $row
-        ]);
+        return JDV::result($row);
     }
 
     function delete($id){
         $filename = DB::table($this->tbl)->where('id',$id)->value('photo_file_name');
         SaveImage::deleteImage($this->dir,$filename);
-        DB::table($this->tbl)->where('id',$id)->delete();
+        $row = DB::table($this->tbl)->where('id',$id)->delete();
 
-        return response()->json([
-            'status' => 200,
-            'message' => 'Deleted Successfully!'
-        ]);
+        return JDV::depend($row,'Uniform Student Deleted Successfully!');
     }
 }

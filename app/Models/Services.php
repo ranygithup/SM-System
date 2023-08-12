@@ -5,6 +5,7 @@ namespace App\Models;
 use Exception;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use App\Models\JDV;
 
 class Services
 {
@@ -19,62 +20,43 @@ class Services
         $validate = Validator::make($data,$rules);
 
         if($validate->fails()){
-            return response()->json([
-                'status' => 200,
-                'error_message' => $validate->messages()
-            ]);
+            return JDV::error(404,$validate->messages());
         }
         else{
             try{
                 if($data['id'] > 0){
-                    DB::table($this->tbl)->update([
+                    $row = DB::table($this->tbl)->update([
                         'name' => $data['name']
                     ]);
+
+                    return JDV::depend($row,'Service Updated!');
                 }
                 else{
-                    DB::table($this->tbl)->insert([
+                    $row = DB::table($this->tbl)->insert([
                         'name' => $data['name']
                     ]);
-                }
 
-                return response()->json([
-                    'status' => 200,
-                    'message' => 'Service Added'
-                ]);
+                    return JDV::depend($row,'Service Added!');
+                }
             }
             catch(Exception $e){
-                return response()->json([
-                    'status' => 500,
-                    'error_message' => 'Something went wrong'
-                ]);
+                return JDV::error(500,'Something went wrong');
             }
         }
     }
 
     function list(){
         $rows = DB::table($this->tbl)->selectRaw('id,name,created_at')->get();
-
-        return response()->json([
-            'status' => 200,
-            'data' => $rows
-        ]);
+        return JDV::result($rows);
     }
 
     function details($id){
         $row = DB::table($this->tbl)->where('id',$id)->selectRaw('id,name')->first();
-
-        return response()->json([
-            'status' => 200,
-            'data' => $row
-        ]);
+        return JDV::result($row);
     }
 
     function delete($id){
-        DB::table($this->tbl)->where('id',$id)->delete();
-
-        return response()->json([
-            'status' => 200,
-            'message' => 'Deleted Successfully!'
-        ]);
+        $row = DB::table($this->tbl)->where('id',$id)->delete();
+        return JDV::depend($row,'Service Deleted Successfully!');
     }
 }

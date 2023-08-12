@@ -18,7 +18,7 @@ class SaveImage
 
     static function deleteImage($dir, $filename){
         $path = $dir.'/'.$filename;
-        Storage::disk('local_public')->delete($path);
+        return Storage::disk('local_public')->delete($path);
     }
 
     static function getImage($dir,$filename){

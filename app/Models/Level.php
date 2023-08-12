@@ -5,6 +5,7 @@ namespace App\Models;
 use Exception;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use App\Models\JDV;
 
 class Level
 {
@@ -21,38 +22,31 @@ class Level
         $validator = Validator::make($data,$rules);
 
         if($validator->fails()){
-            return response()->json([
-                'status' => 200,
-                'error_message' => $validator->messages()
-            ]);
+            return JDV::error(404,$validator->messages());
         }
         else{
             try{
                 if($data['id'] > 0){
-                    DB::table($this->tbl)->where('id',$data['id'])->update([
+                    $row = DB::table($this->tbl)->where('id',$data['id'])->update([
                         'name' => $data['name'],
                         'program_id' => $data['program_id'],
                         'department_id' => $data['department_id']
                     ]);
+
+                    return JDV::depend($row,'Level Updated!');
                 }
                 else{
-                    DB::table($this->tbl)->insert([
+                    $row = DB::table($this->tbl)->insert([
                         'name' => $data['name'],
                         'program_id' => $data['program_id'],
                         'department_id' => $data['department_id']
                     ]);
-                }
 
-                return response()->json([
-                    'status' => 200,
-                    'data' => 'Level Added'
-                ]);
+                    return JDV::depend($row,'Level Added!');
+                }
             }
             catch(Exception $e){
-                return response()->json([
-                    'status' => 500,
-                    'error_message' => 'Something went wrong'
-                ]);
+                return JDV::error(500,'Something went wrong!');
             }
         }
     }
@@ -60,27 +54,17 @@ class Level
     function list(){
         $rows = DB::table($this->tbl.' as l')->join('main_program as m','m.id','=','l.program_id')->join('department as d','d.id','=','l.department_id')->selectRaw('l.id,l.name,m.name as program,d.name as department')->get();
 
-        return response()->json([
-            'status' => 200,
-            'data' => $rows
-        ]);
+        return JDV::result($rows);
     }
 
     function details($id){
         $row = DB::table($this->tbl)->where('id',$id)->selectRaw('id,name,program_id,department_id')->first();
 
-        return response()->json([
-            'status' => 200,
-            'data' => $row
-        ]);
+        return JDV::result($row);
     }
 
     function delete($id){
-        DB::table($this->tbl)->where('id',$id)->delete();
-        
-        return response()->json([
-            'status' => 200,
-            'message' => 'Deleted Successfully!'
-        ]);
+        $row = DB::table($this->tbl)->where('id',$id)->delete();
+        return JDV::depend($row,'Level Deleted Successfully!');
     }
 }
