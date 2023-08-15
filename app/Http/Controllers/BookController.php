@@ -7,6 +7,10 @@ use App\Models\Book;
 
 class BookController extends Controller
 {
+    function __construct(){
+        $this->middleware('auth:api');
+    }
+
     function save(Request $req){
         $b = new Book();
         return $b->save($req->all());

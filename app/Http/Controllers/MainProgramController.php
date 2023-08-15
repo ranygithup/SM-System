@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class MainProgramController extends Controller
 {
+    function __construct(){
+        $this->middleware('auth:api');
+    }
+    
     function save(Request $req){
         $m = new MainProgram();
         return $m->save($req->all());

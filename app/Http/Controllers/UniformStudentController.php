@@ -7,6 +7,10 @@ use App\Models\UniformStudent;
 
 class UniformStudentController extends Controller
 {
+    function __construct(){
+        $this->middleware('auth:api');
+    }
+    
     function save(Request $req){
         $uniformstudent = new UniformStudent();
         return $uniformstudent->save($req->all());

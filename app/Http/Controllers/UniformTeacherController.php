@@ -7,6 +7,10 @@ use App\Models\UniformTeacher;
 
 class UniformTeacherController extends Controller
 {
+    function __construct(){
+        $this->middleware('auth:api');
+    }
+    
     function save(Request $req){
         $uniformTeacher = new UniformTeacher();
         return $uniformTeacher->save($req->all());

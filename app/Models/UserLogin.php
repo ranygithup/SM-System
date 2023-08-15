@@ -1,58 +1,94 @@
 <?php
 
 namespace App\Models;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
-use Exception;
+use App\Models\User;
 
-class UserLogin
-{
-    protected $tbl = 'user';
+class UserLogin{
+    function login($req){
+        $req->validate([
+            'name' => 'required|string',
+            'password' => 'required|string',
+        ]);
+        $credentials = $req->only('name','password');
 
-    function login($data){
-        $rules = [
-            'username' => 'required',
-            'password' => 'required|min:8|max:20'
-        ];
-
-        $validator = Validator::make($data,$rules);
-
-        if($validator->fails()){
-            return back()->with('fails',response()->json($validator->messages()));
+        $token = Auth::attempt($credentials);
+        if(!$token){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Unauthorized',
+            ],401);
         }
-        else{
-            try{
-                $row = DB::table($this->tbl)->where('name',$data['username'])->selectRaw('id,name,password')->first();
 
-                if($row){
-                    if(Hash::check($data['password'],$row->password)){
-                        Session::put('id',$row->id);
-                        return redirect('school');
-                    }
-                    else{
-                        return redirect('/');
-                    }
-                }
-                else{
-                    return back()->with('fails',response()->json($row))->redirect('/');
-                }
-            }
-            catch(Exception $e){
-                return back()->with('fails','Something went wrong');
-            }
-        }
+        $user = Auth::user();
+        return response()->json([
+            'status' => 200,
+            'user' => $user,
+            'authorisation' => [
+                'token' => $token,
+                'type' => 'bearer'
+            ]
+        ]);
     }
 
-    function dashboard(){
-        $data = [];
-        if(Session::has('id')){
-            $data = DB::table($this->tbl)->where('id',Session::get('id'))->selectRaw('id,name,password')->first();
-        }
-        else{
+    function register($req){
+        $req->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6',
+        ]);
+
+        $user = User::create([
+            'name' => $req->name,
+            'email' => $req->email,
+            'password' => Hash::make($req->password)
+        ]);
+
+        $token = Auth::login($user);
+        return response()->json([
+            'status' => 200,
+            'message' => 'User created successfully',
+            'user' => $user,
+            'authorisation' => [
+                'token' => $token,
+                'type' => 'bearer'
+            ]
+        ]);
+    }
+
+    function logout(){
+        Auth::logout();
+        return response()->json([
+            'status' => 200,
+            'message' => 'Successfully logged out',
+        ]);
+    }
+
+    function refresh(){
+        return response()->json([
+            'status' => 200,
+            'user' => Auth::user(),
+            'authorisation' => [
+                'token' => Auth::refresh(),
+                'type' => 'bearer'
+            ]
+        ]);
+    }
+
+    function dashboard($req){
+        $req->validate([
+            'name' => 'required|string',
+            'password' => 'required|string',
+        ]);
+        $credentials = $req->only('name','password');
+
+        $token = Auth::attempt($credentials);
+        if(!$token){
             return redirect('/');
         }
-        return view('master',compact('data'));
+
+        $user = Auth::user();
+        return redirect()->route('school',['user' => $user]);
     }
 }

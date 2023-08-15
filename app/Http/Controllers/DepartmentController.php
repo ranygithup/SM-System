@@ -7,6 +7,10 @@ use App\Models\Department;
 
 class DepartmentController extends Controller
 {
+    function __construct(){
+        $this->middleware('auth:api');
+    }
+    
     function save(Request $req)
     {
         $d = new Department();

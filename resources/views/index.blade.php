@@ -9,11 +9,11 @@
     <body>
         <div class="container-login">
             <p class="fs-header">Welcome to School Management System</p>
-            <form action="{{ route('login') }}" method="POST">
+            <form action="{{ route('processLogin') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" name="username"/>
+                    <input type="text" class="form-control" name="name"/>
                 </div>
                 <div class="form-group">
                     <label for="username" class="form-label">Password</label>

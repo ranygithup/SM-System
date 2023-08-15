@@ -7,5 +7,8 @@ Route::get('/', function(){
     return view('index');
 });
 
-Route::get('/school',[UserController::class,'dashboard']);
-Route::post('/processLogin',[UserController::class,'login'])->name('login');
+Route::get('/school',function(){
+    return view('master');
+})->name('school');
+
+Route::post('/processLogin',[UserController::class,'dashboard'])->name('processLogin');

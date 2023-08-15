@@ -7,6 +7,10 @@ use App\Models\Services;
 
 class ServicesController extends Controller
 {
+    function __construct(){
+        $this->middleware('auth:api');
+    }
+    
     function save(Request $req){
         $service = new Services();
         return $service->save($req->all());

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Models\JDV;
@@ -40,7 +42,7 @@ class Book{
                             'photo_file_name' => SaveImage::saveImage($this->dir,$data['photo'])
                         ]);
 
-                        return JDV::depend($row,'Book Updated!');
+                        return JDV::depend($row,'Book Updated! '.$row);
                     }
                 }
                 else{

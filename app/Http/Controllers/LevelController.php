@@ -7,6 +7,10 @@ use App\Models\Level;
 
 class LevelController extends Controller
 {
+    function __construct(){
+        $this->middleware('auth:api');
+    }
+    
     function save(Request $req){
         $level = new Level();
         return $level->save($req->all());
