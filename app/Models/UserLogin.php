@@ -3,6 +3,7 @@
 namespace App\Models;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use App\Models\User;
 
 class UserLogin{
@@ -51,7 +52,7 @@ class UserLogin{
             'message' => 'User created successfully',
             'user' => $user,
             'authorisation' => [
-                'token' => $token,
+                'access_token' => $token,
                 'type' => 'bearer'
             ]
         ]);
@@ -85,6 +86,9 @@ class UserLogin{
 
         $token = Auth::attempt($credentials);
         if(!$token){
+            if(Session::has('_token')){
+                Session::remove('_token');
+            }
             return redirect('/');
         }
 
