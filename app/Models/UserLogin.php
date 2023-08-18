@@ -89,6 +89,10 @@ class UserLogin{
         }
 
         $user = Auth::user();
-        return redirect()->route('school',['user' => $user]);
+        $req->session()->put([
+            'user' => $user,
+            '_token' => $token
+        ]);
+        return redirect()->route('school');
     }
 }

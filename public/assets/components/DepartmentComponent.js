@@ -46,7 +46,7 @@ var DepartmentComponent = new function(){
     };
 
     this.displayDepartment = (onFinish = null) => {
-        api.getData('api/department/list').then(res => {
+        api.postData('api/department/list').then(res => {
             let data = [];
             if(res.status === 200){
                 data = res.data;
