@@ -17,7 +17,6 @@ class API{
     async postData(apiUrl, payLoad){
         let api = [document.location.origin, apiUrl].join('/');
         let token = this.getToken();
-        console.log(token);
         const response = await fetch(api, {
             method: 'POST',
             headers: {

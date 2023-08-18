@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Cookie;
 
 Route::get('/', function(){
     return view('index');
