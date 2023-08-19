@@ -12,11 +12,11 @@
             <form action="{{ route('processLogin') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="username" class="form-label">Username</label>
+                    <label for="name" class="form-label">Username</label>
                     <input type="text" class="form-control" name="name"/>
                 </div>
                 <div class="form-group">
-                    <label for="username" class="form-label">Password</label>
+                    <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" name="password" autocomplete="true"/>
                 </div>
                 <div class="form-group-btn">

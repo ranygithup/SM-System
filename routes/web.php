@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Session;
 
 Route::get('/', function(){
+    Session::remove('user');
     return view('index');
 });
 
@@ -13,6 +14,7 @@ Route::get('/school',function(){
         return view('master');
     }
     else{
+        Session::remove('user');
         return redirect('/');
     }
 })->name('school');

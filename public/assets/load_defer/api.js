@@ -1,7 +1,7 @@
 class API{
     async getData(apiUrl) {
         let api = [document.location.origin, apiUrl].join('/');
-        let token = this.getToken();
+        let token = this.getCookie('darasmschool');
         const response = await fetch(api,{
             method: 'POST',
             headers: {
@@ -16,8 +16,8 @@ class API{
 
     async postData(apiUrl, payLoad){
         let api = [document.location.origin, apiUrl].join('/');
-        let token = this.getToken();
-        const response = await fetch(api, {
+        let token = this.getCookie('darasmschool');
+        const res = await fetch(api, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -26,8 +26,20 @@ class API{
             },
             body: JSON.stringify(payLoad)
         });
-        const data = await response.json();
-        return data;
+
+        switch(res['status']){
+            case 200:
+                const data = await res.json();
+                return data;
+            case 401:
+                window.location.href = '/';
+                break;
+            case 500:
+                console.error(data.status+' Internal Server Error!');
+                break;
+            default:
+                break;
+        }
     };
 
     getCookie = (name) => {
@@ -36,11 +48,6 @@ class API{
         ));
         return matches ? decodeURIComponent(matches[1]) : undefined;
     };
-
-    getToken = () => {
-        let token = document.head.querySelector('meta[name="csrf-token"]').content;
-        return token;
-    }
 };
 
 const api = new API();

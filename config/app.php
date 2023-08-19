@@ -18,6 +18,7 @@ return [
     'maintenance' => [
         'driver' => 'file',
     ],
+    'cookie_name' => env('COOKIE_NAME'),
 
     'providers' => ServiceProvider::defaultProviders()->merge([
         App\Providers\AppServiceProvider::class,

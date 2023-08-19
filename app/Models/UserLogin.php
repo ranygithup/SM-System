@@ -4,6 +4,7 @@ namespace App\Models;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cookie;
 use App\Models\User;
 
 class UserLogin{
@@ -71,7 +72,7 @@ class UserLogin{
             'status' => 200,
             'user' => Auth::user(),
             'authorisation' => [
-                'token' => Auth::refresh(),
+                'access_token' => Auth::refresh(),
                 'type' => 'bearer'
             ]
         ]);
@@ -86,17 +87,17 @@ class UserLogin{
 
         $token = Auth::attempt($credentials);
         if(!$token){
-            if(Session::has('_token')){
-                Session::remove('_token');
+            if(Session::has('user')){
+                Session::remove('user');
             }
             return redirect('/');
         }
 
+        $cookie = config('app.cookie_name');
         $user = Auth::user();
         $req->session()->put([
-            'user' => $user,
-            '_token' => $token
+            'user' => $user
         ]);
-        return redirect()->route('school');
+        return redirect()->route('school')->withCookie(Cookie::make($cookie,$token,0,'/',null,null,false));
     }
 }
