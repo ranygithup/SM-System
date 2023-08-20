@@ -89,7 +89,7 @@ class Book{
     }
 
     function getOptions(){
-        $program = DB::table('main_program')->selectRaw('id,name')->get();
+        $program = DB::table('level')->selectRaw('id,name')->get();
         $department = DB::table('department')->selectRaw('id,name')->get();
 
         return JDV::result([

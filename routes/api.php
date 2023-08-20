@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GeneralSettingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\MainProgramController;
@@ -17,6 +18,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/login', [UserController::class, 'login']);
+
+Route::prefix('options')->group(function(){
+    Route::post('/level',[GeneralSettingController::class,'getLevelByDepartment']);
+});
 
 Route::prefix('department')->group(function(){
     Route::post('/save',[DepartmentController::class,'save']);

@@ -6,7 +6,7 @@ class Modal{
         'image': image,
         'html': html,
         'api_save': api_save,
-        'api_modify': api_modify
+        'api_modify': api_modify,
     }){
         this.id = options.id,
         this.title = options.title,
@@ -109,6 +109,8 @@ class Modal{
             else
                 el.val(d[f]);
         });
+        
+        this.addOption(d);
     };
 
     loadDataDetails = (op) => {
@@ -201,6 +203,8 @@ class Modal{
         const urlRegex = /^(https?|ftp):\/\/[^\s/$.?].[^\s]*$/i;
         callback && callback(urlRegex.test(url));
     };
+
+    addOption = () => {};
 
     show = (op) => {
         this.data_id = op.id;

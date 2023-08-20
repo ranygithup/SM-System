@@ -70,12 +70,12 @@ var LevelComponent = new function(){
                 data: "name"
             },
             {
-                title: "Program",
-                data: "program"
-            },
-            {
                 title: "Department",
                 data: "department"
+            },
+            {
+                title:"Created",
+                data: "updated_at"
             },
             {
                 title: "Action",
@@ -137,7 +137,7 @@ var LevelComponent = new function(){
 };
 
 let prepareLevel = (onFinish = null) => {
-    let html = null, program = null, department = null;
+    let html = null, department = null;
     api.getData('api/book/get-options').then(res => {
         let d = {};
         if(res.status === 200){
@@ -145,20 +145,6 @@ let prepareLevel = (onFinish = null) => {
         }
 
         html = [`<div class="form-group">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control data-input" data-field="name"/>
-        </div>
-        <div class="form-group mt-3">
-            <label for="program_id" class="form-label">Program</label>
-            <div class="width-select-in-form">
-                <select class="modal-select2 data-input" data-field="program_id">
-                    ${d && d.programs.map(option => {
-                        program = [program,`<option value="${option.id}">${option.name}<option>`].join('');
-                    }), program}
-                </select>
-            </div>
-        </div>
-        <div class="form-group mt-3">
             <label for="department_id" class="form-label">Department</label>
             <div class="width-select-in-form">
                 <select class="modal-select2 data-input" data-field="department_id">
@@ -167,6 +153,10 @@ let prepareLevel = (onFinish = null) => {
                     }), department}
                 </select>
             </div>
+        </div>
+        <div class="form-group mt-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control data-input" data-field="name"/>
         </div>`].join('');
 
         if(typeof onFinish === 'function') onFinish(html);

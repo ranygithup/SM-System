@@ -11,14 +11,14 @@ window.addEventListener('DOMContentLoaded', () => {
             'icon':'department.png'
         },
         {
-            'name':'Main Program',
-            'component':'MainProgramComponent',
-            'icon':'main_programs.png'
-        },
-        {
             'name':'Level',
             'component':'LevelComponent',
             'icon':'level.png'
+        },
+        {
+            'name':'Main Program',
+            'component':'MainProgramComponent',
+            'icon':'main_programs.png'
         },
         {
             'name':'Services',

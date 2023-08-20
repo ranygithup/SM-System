@@ -16,7 +16,7 @@ var MainProgramComponent = new function(){
                     mThis.displayMainProgram();
                 }
             };
-            loadFormOption((html) => {
+            loadProgramOption((html) => {
                 main_program.html = html;
                 main_program.show(op);
             });
@@ -30,7 +30,7 @@ var MainProgramComponent = new function(){
                     mThis.displayMainProgram();
                 }
             };
-            loadFormOption((html) => {
+            loadProgramOption((html) => {
                 main_program.html = html;
                 main_program.show(op);
             });
@@ -70,12 +70,16 @@ var MainProgramComponent = new function(){
                 data: "name"
             },
             {
+                title: "Level",
+                data:"level"
+            },
+            {
                 title: "Department",
                 data: "department"
             },
             {
                 title: "Created",
-                data: "created_at"
+                data: "updated_at"
             },
             {
                 title: "Action",
@@ -136,25 +140,28 @@ var MainProgramComponent = new function(){
     };
 };
 
-let loadFormOption = (onFinish = null) => {
-    let html = null;
+let loadProgramOption = (onFinish = null) => {
+    let html = null, inner_html = null;
     api.getData('api/department/list').then(res => {
-        let data = [], inner_html = null;
+        let data = [];
         if(res.status === 200){
             data = res.data;
         }
 
-        data.map(op => {
-            inner_html = [inner_html, `<option value="${op.id}">${op.name}</option>`].join('');
-        });
-
         html = [`<div class="form-group">
             <label for="department_id" class="form-label">Department</label>
             <div class="width-select-in-form">
-                <select class="modal-select2 form-control data-input" data-field="department_id">
-                    ${inner_html}
-                    <option selected></option>
+                <select id="main_program_department" class="modal-select2 form-control data-input" data-field="department_id">
+                    ${inner_html=null, data && data.map(op => {
+                        inner_html = [inner_html, `<option value="${op.id}">${op.name}</option>`].join('');
+                    }),inner_html=[inner_html,`<option selected></option>`].join('')}
                 </select>
+            </div>
+        </div>
+        <div class="form-group mt-3">
+            <label for="program_id" class="form-label">Program</label>
+            <div class="width-select-in-form">
+                <select id="main_program_level" class="modal-select2 form-control data-input" data-field="program_id"></select>
             </div>
         </div>
         <div class="form-group mt-3">
@@ -172,6 +179,35 @@ const main_program = new Modal({
     api_save: 'api/main-program/save',
     api_modify: 'api/main-program/details'
 });
+
+main_program.addOption = function(data=null){
+    let modal = $(`#${this.id}`),
+    department = modal.find('#main_program_department'),
+    program = modal.find('#main_program_level');
+    
+    let init = data ? data : {};
+
+    department.off('change').on('change',function(e){
+        e.preventDefault();
+        let op = {
+            'department_id': $(this).val()
+        };
+        if(op.department_id > 0){
+            api.postData('api/options/level',op).then(res => {
+                let d = [];
+                if(res.status === 200){
+                    d = res.data;
+                }
+
+                if(init)
+                    util.setComboItems(program,d,'id','name',init.program_id);
+                else
+                    util.setComboItems(program,d,'id','name',null);
+            });
+        }
+    });
+    if(init) department.trigger('change');
+};
 
 window.addEventListener('DOMContentLoaded',() => {
     MainProgramComponent.init();

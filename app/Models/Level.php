@@ -15,7 +15,6 @@ class Level
         $rules = [
             'id' => 'numeric',
             'name' => 'required|string|min:1|max:150',
-            'program_id' => 'required|numeric',
             'department_id' => 'required|numeric'
         ];
 
@@ -29,7 +28,6 @@ class Level
                 if($data['id'] > 0){
                     $row = DB::table($this->tbl)->where('id',$data['id'])->update([
                         'name' => $data['name'],
-                        'program_id' => $data['program_id'],
                         'department_id' => $data['department_id']
                     ]);
 
@@ -38,7 +36,6 @@ class Level
                 else{
                     $row = DB::table($this->tbl)->insert([
                         'name' => $data['name'],
-                        'program_id' => $data['program_id'],
                         'department_id' => $data['department_id']
                     ]);
 
@@ -52,13 +49,13 @@ class Level
     }
 
     function list(){
-        $rows = DB::table($this->tbl.' as l')->join('main_program as m','m.id','=','l.program_id')->join('department as d','d.id','=','l.department_id')->selectRaw('l.id,l.name,m.name as program,d.name as department')->get();
+        $rows = DB::table($this->tbl.' as l')->join('department as d','d.id','=','l.department_id')->selectRaw('l.id,l.name,d.name as department,l.updated_at')->get();
 
         return JDV::result($rows);
     }
 
     function details($id){
-        $row = DB::table($this->tbl)->where('id',$id)->selectRaw('id,name,program_id,department_id')->first();
+        $row = DB::table($this->tbl)->where('id',$id)->selectRaw('id,name,department_id')->first();
 
         return JDV::result($row);
     }

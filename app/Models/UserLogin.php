@@ -28,7 +28,7 @@ class UserLogin{
             'status' => 200,
             'user' => $user,
             'authorisation' => [
-                'token' => $token,
+                'access_token' => $token,
                 'type' => 'bearer'
             ]
         ]);
