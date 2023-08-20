@@ -11,7 +11,19 @@ class API{
             }
         });
         const data = await res.json();
-        return data;
+        
+        switch(res['status']){
+            case 200:
+                return data;
+            case 401:
+                window.location.href = '/';
+                break;
+            case 500:
+                console.error(data.status+' Internal Server Error!');
+                break;
+            default:
+                break;
+        };
     };
 
     async postData(apiUrl, payLoad){
