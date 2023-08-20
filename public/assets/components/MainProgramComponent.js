@@ -186,7 +186,6 @@ main_program.addOption = function(data=null){
     program = modal.find('#main_program_level');
 
     let init = $.isEmptyObject(data) ? null : data;
-    console.log(init);
 
     department.on('change',function(e){
         e.preventDefault();
@@ -207,7 +206,7 @@ main_program.addOption = function(data=null){
             });
         }
     });
-    
+
     if(init)
         department.trigger('change');
 };
