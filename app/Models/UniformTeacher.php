@@ -18,7 +18,7 @@ class UniformTeacher
             'id' => 'numeric',
             'sex' => 'required|string|min:1|max:8',
             'description' => 'string|min:5|max:250',
-            'photo' => 'string'
+            'photo' => 'string|nullable'
         ];
 
         $validator = Validator::make($data,$rules);
@@ -37,7 +37,7 @@ class UniformTeacher
                         $row = DB::table($this->tbl)->update([
                             'sex' => $data['sex'],
                             'description' => $data['description'],
-                            'photo_file_name' => SaveImage::saveImage($this->dir,$data['photo'])
+                            'photo_file_name' => $data['photo'] !== NULL ? SaveImage::saveImage($this->dir,$data['photo']) : NULL
                         ]);
 
                         return JDV::depend($row,'Uniform Teacher Updated!');
@@ -47,7 +47,7 @@ class UniformTeacher
                     $row = DB::table($this->tbl)->insert([
                         'sex' => $data['sex'],
                         'description' => $data['description'],
-                        'photo_file_name' => SaveImage::saveImage($this->dir,$data['photo'])
+                        'photo_file_name' => $data['photo'] !== NULL ? SaveImage::saveImage($this->dir,$data['photo']) : NULL
                     ]);
 
                     return JDV::depend($row,'Uniform Teacher Added!');
@@ -62,7 +62,10 @@ class UniformTeacher
     function list(){
         $rows = DB::table($this->tbl)->selectRaw('id,sex,description,photo_file_name')->get();
         foreach($rows as $row){
-            $row->image_url = SaveImage::getImage($this->dir,$row->photo_file_name);
+            if($row->photo_file_name === NULL)
+                $row->image_url = '';
+            else
+                $row->image_url = SaveImage::getImage($this->dir,$row->photo_file_name);
             unset($row->photo_file_name);
         }
 
@@ -71,7 +74,10 @@ class UniformTeacher
 
     function details($id){
         $row = DB::table($this->tbl)->where('id',$id)->selectRaw('id,sex,description,photo_file_name')->first();
-        $row->image_url = SaveImage::getImage($this->dir,$row->photo_file_name);
+        if($row->photo_file_name === NULL)
+            $row->image_url = '';
+        else
+            $row->image_url = SaveImage::getImage($this->dir,$row->photo_file_name);
         unset($row->photo_file_name);
 
         return JDV::result($row);

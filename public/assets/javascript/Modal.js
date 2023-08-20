@@ -145,6 +145,7 @@ class Modal{
         div.find(`#${btn_delete}`).on('click',(e) => {
             e.preventDefault();
             let container_image = $(`#${btn_delete}`).closest('.bok-dlg-image');
+            this.photo = null;
 
             container_image.html([`<div id="${btn_image}" class="bok-dlg-image-empty">
                 <i class="fa-regular fa-image text-muted fs-3"></i>

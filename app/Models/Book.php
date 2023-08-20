@@ -17,7 +17,7 @@ class Book{
             'description' => 'string|min:10|max:150',
             'program_id' => 'required|numeric',
             'department_id' =>'required|numeric',
-            'photo' => 'string'
+            'photo' => 'string|nullable'
         ];
 
         $validator = Validator::make($data,$rules);
@@ -37,7 +37,7 @@ class Book{
                             "description" => $data['description'],
                             'program_id' => $data['program_id'],
                             'department_id' => $data['department_id'],
-                            'photo_file_name' => SaveImage::saveImage($this->dir,$data['photo'])
+                            'photo_file_name' => $data['photo'] !== NULL ? SaveImage::saveImage($this->dir,$data['photo']) : NULL
                         ]);
 
                         return JDV::depend($row,'Book Updated! '.$row);
@@ -49,7 +49,7 @@ class Book{
                         "description" => $data['description'],
                         'program_id' => $data['program_id'],
                         'department_id' => $data['department_id'],
-                        'photo_file_name' => SaveImage::saveImage('images',$data['photo'])
+                        'photo_file_name' => $data['photo'] !== NULL ? SaveImage::saveImage('images',$data['photo']) : NULL
                     ]);
 
                     return JDV::depend($row,'Book Added!');
@@ -64,7 +64,10 @@ class Book{
     function list(){
         $rows = DB::table($this->tbl.' as b')->join('main_program as m','m.id','=','b.program_id')->join('department as d','d.id','=','b.department_id')->selectRaw('b.id,b.name,b.description,b.photo_file_name,m.name as program,d.name as department')->get();
         foreach($rows as $row){
-            $row->image_url = SaveImage::getImage($this->dir,$row->photo_file_name);
+            if($row->photo_file_name === NULL)
+                $row->image_url = '';
+            else
+                $row->image_url = SaveImage::getImage($this->dir,$row->photo_file_name);
             unset($row->photo_file_name);
         }
         
@@ -73,8 +76,10 @@ class Book{
 
     function details($id){
         $row = DB::table($this->tbl)->where('id',$id)->selectRaw('id,name,description,program_id,department_id,photo_file_name')->first();
-        
-        $row->image_url = SaveImage::getImage($this->dir,$row->photo_file_name);
+        if($row->photo_file_name === NULL)
+            $row->image_url = '';
+        else
+            $row->image_url = SaveImage::getImage($this->dir,$row->photo_file_name);
         unset($row->photo_file_name);
 
         return JDV::result($row);

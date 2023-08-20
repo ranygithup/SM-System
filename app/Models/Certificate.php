@@ -18,7 +18,7 @@ class Certificate
             'id' => 'numeric',
             'name' => 'required|string|min:3|max:150',
             'description' => 'required|string|min:3|max:250',
-            'photo' => 'string'
+            'photo' => 'string|nullable'
         ];
 
         $validate = Validator::make($data,$rules);
@@ -36,7 +36,7 @@ class Certificate
                         $row = DB::table($this->tbl)->update([
                             'name' => $data['name'],
                             'description' => $data['description'],
-                            'photo_file_name' => SaveImage::saveImage($this->dir,$data['photo'])
+                            'photo_file_name' => $data['photo'] !== NULL ? SaveImage::saveImage($this->dir,$data['photo']) : NULL
                         ]);
 
                         return JDV::depend($row,'Certificate Updated!');
@@ -46,7 +46,7 @@ class Certificate
                     $row = DB::table($this->tbl)->insert([
                         'name' => $data['name'],
                         'description' => $data['description'],
-                        'photo_file_name' => SaveImage::saveImage($this->dir,$data['photo'])
+                        'photo_file_name' => $data['photo'] !== NULL ? SaveImage::saveImage($this->dir,$data['photo']) : NULL
                     ]);
 
                     return JDV::depend($row,'Certificate Added!');
@@ -62,7 +62,10 @@ class Certificate
         $rows = DB::table($this->tbl)->selectRaw('id,name,description,photo_file_name,created_at')->get();
 
         foreach($rows as $row){
-            $row->image_url = SaveImage::getImage($this->dir,$row->photo_file_name);
+            if($row->photo_file_name === NULL)
+                $row->image_url = '';
+            else
+                $row->image_url = SaveImage::getImage($this->dir,$row->photo_file_name);
             unset($row->photo_file_name);
         }
         
@@ -71,7 +74,10 @@ class Certificate
 
     function details($id){
         $row = DB::table($this->tbl)->where('id',$id)->selectRaw('id,name,description,photo_file_name')->first();
-        $row->image_url = SaveImage::getImage($this->dir,$row->photo_file_name);
+        if($row->photo_file_name === NULL)
+            $row->image_url = '';
+        else
+            $row->image_url = SaveImage::getImage($this->dir,$row->photo_file_name);
         unset($row->photo_file_name);
 
         return JDV::result($row);
