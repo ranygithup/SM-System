@@ -1,8 +1,8 @@
 class API{
-    async getData(apiUrl) {
+    async getData(apiUrl){
         let api = [document.location.origin, apiUrl].join('/');
         let token = this.getCookie('darasmschool');
-        const response = await fetch(api,{
+        const res = await fetch(api,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -10,9 +10,9 @@ class API{
                 'Authorization': `Bearer ${token}`
             }
         });
-        const data = await response.json();
+        const data = await res.json();
         return data;
-    }
+    };
 
     async postData(apiUrl, payLoad){
         let api = [document.location.origin, apiUrl].join('/');
@@ -26,10 +26,10 @@ class API{
             },
             body: JSON.stringify(payLoad)
         });
+        const data = await res.json();
 
         switch(res['status']){
             case 200:
-                const data = await res.json();
                 return data;
             case 401:
                 window.location.href = '/';
@@ -39,7 +39,7 @@ class API{
                 break;
             default:
                 break;
-        }
+        };
     };
 
     getCookie = (name) => {

@@ -4,10 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Session;
 
-Route::get('/', function(){
+Route::get('/',function(){
     Session::remove('user');
     return view('index');
-});
+})->name('login');
 
 Route::get('/school',function(){
     if(Session::has('user')){

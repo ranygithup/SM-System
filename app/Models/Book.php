@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use JWTAuth;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Models\JDV;
