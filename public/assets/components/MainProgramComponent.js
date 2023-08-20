@@ -184,10 +184,11 @@ main_program.addOption = function(data=null){
     let modal = $(`#${this.id}`),
     department = modal.find('#main_program_department'),
     program = modal.find('#main_program_level');
-    
-    let init = data ? data : {};
 
-    department.off('change').on('change',function(e){
+    let init = $.isEmptyObject(data) ? null : data;
+    console.log(init);
+
+    department.on('change',function(e){
         e.preventDefault();
         let op = {
             'department_id': $(this).val()
@@ -206,7 +207,9 @@ main_program.addOption = function(data=null){
             });
         }
     });
-    if(init) department.trigger('change');
+    
+    if(init)
+        department.trigger('change');
 };
 
 window.addEventListener('DOMContentLoaded',() => {
