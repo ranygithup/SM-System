@@ -30,17 +30,13 @@ class Certificate
                 if($data['id'] > 0){
                     $filename = DB::table($this->tbl)->where('id',$data['id'])->value('photo_file_name');
                     if($filename)
-                        $del = SaveImage::deleteImage($this->dir,$filename);
-
-                    if($del){
-                        $row = DB::table($this->tbl)->update([
-                            'name' => $data['name'],
-                            'description' => $data['description'],
-                            'photo_file_name' => $data['photo'] !== NULL ? SaveImage::saveImage($this->dir,$data['photo']) : NULL
-                        ]);
-
-                        return JDV::depend($row,'Certificate Updated!');
-                    }
+                        SaveImage::deleteImage($this->dir,$filename);
+                    $row = DB::table($this->tbl)->update([
+                        'name' => $data['name'],
+                        'description' => $data['description'],
+                        'photo_file_name' => $data['photo'] !== NULL ? SaveImage::saveImage($this->dir,$data['photo']) : NULL
+                    ]);
+                    return JDV::depend($row,'Certificate Updated!');
                 }
                 else{
                     $row = DB::table($this->tbl)->insert([
@@ -48,7 +44,6 @@ class Certificate
                         'description' => $data['description'],
                         'photo_file_name' => $data['photo'] !== NULL ? SaveImage::saveImage($this->dir,$data['photo']) : NULL
                     ]);
-
                     return JDV::depend($row,'Certificate Added!');
                 }
             }

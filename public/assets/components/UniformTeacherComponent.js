@@ -119,8 +119,8 @@ var UniformTeacherComponent = new function(){
     this.show = (options) => {
         if(!options) options = {};
         mThis.displayUniformTeacher(() => {
-            new ExpandabelRow('_ufth_tbl',{
-                dontClickOn: ['btn-ufth-modify','btn-ufth-delete']
+            new ExpandableRow(mThis.tblUniformTeacher,{
+                dontOnClick: ['btn-ufth-modify','btn-ufth-delete']
             });
             main_view.setTitle(mThis.title_prop);
             mThis.self.show().siblings().hide();

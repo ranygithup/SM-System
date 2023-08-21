@@ -29,19 +29,15 @@ class Book{
                 if($data['id'] > 0){
                     $file_name = DB::table($this->tbl)->where('id',$data['id'])->value('photo_file_name');
                     if($file_name)
-                        $del = SaveImage::deleteImage($this->dir,$file_name);
-
-                    if($del){
-                        $row = DB::table($this->tbl)->where('id',$data['id'])->update([
-                            "name" => $data['name'],
-                            "description" => $data['description'],
-                            'program_id' => $data['program_id'],
-                            'department_id' => $data['department_id'],
-                            'photo_file_name' => $data['photo'] !== NULL ? SaveImage::saveImage($this->dir,$data['photo']) : NULL
-                        ]);
-
-                        return JDV::depend($row,'Book Updated! '.$row);
-                    }
+                        SaveImage::deleteImage($this->dir,$file_name);
+                    $row = DB::table($this->tbl)->where('id',$data['id'])->update([
+                        "name" => $data['name'],
+                        "description" => $data['description'],
+                        'program_id' => $data['program_id'],
+                        'department_id' => $data['department_id'],
+                        'photo_file_name' => $data['photo'] !== NULL ? SaveImage::saveImage($this->dir,$data['photo']) : NULL
+                    ]);
+                    return JDV::depend($row,'Book Updated! '.$row);
                 }
                 else{
                     $row = DB::table($this->tbl)->insert([
@@ -51,7 +47,6 @@ class Book{
                         'department_id' => $data['department_id'],
                         'photo_file_name' => $data['photo'] !== NULL ? SaveImage::saveImage('images',$data['photo']) : NULL
                     ]);
-
                     return JDV::depend($row,'Book Added!');
                 }
             }
@@ -70,7 +65,6 @@ class Book{
                 $row->image_url = SaveImage::getImage($this->dir,$row->photo_file_name);
             unset($row->photo_file_name);
         }
-        
         return JDV::result($rows);
     }
 

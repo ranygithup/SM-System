@@ -31,17 +31,13 @@ class UniformTeacher
                 if($data['id'] > 0){
                     $filename = DB::table($this->tbl)->where('id',$data['id'])->value('photo_file_name');
                     if($filename)
-                        $del = SaveImage::deleteImage($this->dir,$filename);
-
-                    if($del){
-                        $row = DB::table($this->tbl)->update([
-                            'sex' => $data['sex'],
-                            'description' => $data['description'],
-                            'photo_file_name' => $data['photo'] !== NULL ? SaveImage::saveImage($this->dir,$data['photo']) : NULL
-                        ]);
-
-                        return JDV::depend($row,'Uniform Teacher Updated!');
-                    }
+                        SaveImage::deleteImage($this->dir,$filename);
+                    $row = DB::table($this->tbl)->update([
+                        'sex' => $data['sex'],
+                        'description' => $data['description'],
+                        'photo_file_name' => $data['photo'] !== NULL ? SaveImage::saveImage($this->dir,$data['photo']) : NULL
+                    ]);
+                    return JDV::depend($row,'Uniform Teacher Updated!');
                 }
                 else{
                     $row = DB::table($this->tbl)->insert([
@@ -49,7 +45,6 @@ class UniformTeacher
                         'description' => $data['description'],
                         'photo_file_name' => $data['photo'] !== NULL ? SaveImage::saveImage($this->dir,$data['photo']) : NULL
                     ]);
-
                     return JDV::depend($row,'Uniform Teacher Added!');
                 }
             }
@@ -68,7 +63,6 @@ class UniformTeacher
                 $row->image_url = SaveImage::getImage($this->dir,$row->photo_file_name);
             unset($row->photo_file_name);
         }
-
         return JDV::result($rows);
     }
 
@@ -79,7 +73,6 @@ class UniformTeacher
         else
             $row->image_url = SaveImage::getImage($this->dir,$row->photo_file_name);
         unset($row->photo_file_name);
-
         return JDV::result($row);
     }
 
@@ -87,7 +80,6 @@ class UniformTeacher
         $filename = DB::table($this->tbl)->where('id',$id)->value('photo_file_name');
         SaveImage::deleteImage($this->dir,$filename);
         $row = DB::table($this->tbl)->where('id',$id)->delete();
-
         return JDV::depend($row,'Uniform Teacher Deleted Successfully!');
     }
 }

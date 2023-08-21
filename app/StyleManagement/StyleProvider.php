@@ -1,6 +1,5 @@
 <?php
     namespace App\StyleManagement;
-
     use Illuminate\Support\Facades\File;
 
     class StyleProvider{

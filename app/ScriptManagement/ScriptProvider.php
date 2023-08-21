@@ -1,6 +1,5 @@
 <?php
     namespace App\ScriptManagement;
-
     use Illuminate\Support\Facades\File;
 
     class ScriptProvider{

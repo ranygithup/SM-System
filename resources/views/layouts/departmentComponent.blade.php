@@ -3,6 +3,6 @@
         <button id="_dpm_btn_new" class="btn btn-primary" type="button">New</button>
     </div>
     <div class="table-responsive rounded-3 bg-white p-3 mt-3">
-        <table id="_dpm_tbl" class="table w-100"></table>
+        <table id="_dpm_tbl" class="table table-borderless w-100"></table>
     </div>
 </div>
