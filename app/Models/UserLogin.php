@@ -98,6 +98,6 @@ class UserLogin{
         $req->session()->put([
             'user' => $user
         ]);
-        return redirect()->route('school')->withCookie(Cookie::make($cookie,$token,0,'/',null,null,false));
+        return redirect()->route('school')->withCookie(Cookie::make($cookie,$token,0,'/',null,true,false));
     }
 }
