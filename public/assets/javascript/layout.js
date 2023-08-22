@@ -1,8 +1,8 @@
 window.addEventListener('DOMContentLoaded', () => {
     let list_menu = $('#list_menu_toggle'),
-    container = $('#container_toggle');
+    container = $('#container_toggle'), side_toggle = $('#toggle_aside');
 
-    $('#toggle_aside').on('click',function(e){
+    side_toggle.on('click',function(e){
         e.preventDefault();
         if(list_menu.hasClass('menu-layout-icons')){
             list_menu.removeClass('menu-layout-icons').addClass('menu-layout');
@@ -13,6 +13,17 @@ window.addEventListener('DOMContentLoaded', () => {
             container.removeClass('container-layout').addClass('container-layout-icons');
         }
     });
+
+    const mediaQuery = window.matchMedia('(max-width: 750px)');
+    function handleViewportChange(mediaQuery) {
+        if(mediaQuery.matches){
+            side_toggle.trigger('click');
+        }
+        else{
+            side_toggle.trigger('click');
+        }
+    }
+    mediaQuery.addListener(handleViewportChange);
 
     let div_user = $('#tnc_toggle_usg'),
     icons_user = $('#tnc_toggle_user');
