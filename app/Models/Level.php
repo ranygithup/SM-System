@@ -50,13 +50,14 @@ class Level
 
     function list(){
         $rows = DB::table($this->tbl.' as l')->join('department as d','d.id','=','l.department_id')->selectRaw('l.id,l.name,d.name as department,l.updated_at')->get();
-
+        foreach($rows as $row){
+            $row->updated_at = explode(' ',$row->updated_at)[0];
+        }
         return JDV::result($rows);
     }
 
     function details($id){
         $row = DB::table($this->tbl)->where('id',$id)->selectRaw('id,name,department_id')->first();
-
         return JDV::result($row);
     }
 

@@ -47,6 +47,9 @@ class Department
 
   function list(){
     $rows = DB::table($this->tbl)->selectRaw('id,name,created_at')->get();
+    foreach($rows as $row){
+      $row->created_at = explode(' ',$row->created_at)[0];
+    }
     return JDV::result($rows);
   }
 

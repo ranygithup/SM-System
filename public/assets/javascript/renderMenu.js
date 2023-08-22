@@ -6,6 +6,11 @@ window.addEventListener('DOMContentLoaded', () => {
             'icon':'dashboard.png'
         },
         {
+            'name':'Registration',
+            'component':'RegistrationComponent',
+            'icon':'registration.png'
+        },
+        {
             'name':'Department',
             'component':'DepartmentComponent',
             'icon':'department.png'
@@ -52,12 +57,12 @@ window.addEventListener('DOMContentLoaded', () => {
                 {
                     "name":"Students",
                     "component":"UniformStudentComponent",
-                    "icon":"uniform.png"
+                    "icon":"student_uniform.png"
                 },
                 {
                     "name":"Teacher",
                     "component":"UniformTeacherComponent",
-                    "icon":"uniform.png"
+                    "icon":"teacher_uniform.png"
                 }
             ]
         },
@@ -109,7 +114,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 {
                     "name":"Manage Role",
                     "component":"Management Role",
-                    "icon":"user_management.png"
+                    "icon":"role_management.png"
                 },
                 {
                     "name":"Manage User",
@@ -122,6 +127,17 @@ window.addEventListener('DOMContentLoaded', () => {
             'name':'Mobile Setting',
             'component':'MobileSettingsComponent',
             'icon':'mobile_setting.png'
+        },
+        {
+            'name':'Settings',
+            'icon':'settings.png',
+            'sub_menu':[
+                {
+                    'name':'Term',
+                    'component':'TermComponent',
+                    'icon':'term.png'
+                }
+            ]
         },
         {
             'name':'Log Out',

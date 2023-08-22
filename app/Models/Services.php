@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Models;
-
 use Exception;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -28,14 +27,12 @@ class Services
                     $row = DB::table($this->tbl)->update([
                         'name' => $data['name']
                     ]);
-
                     return JDV::depend($row,'Service Updated!');
                 }
                 else{
                     $row = DB::table($this->tbl)->insert([
                         'name' => $data['name']
                     ]);
-
                     return JDV::depend($row,'Service Added!');
                 }
             }
@@ -47,6 +44,9 @@ class Services
 
     function list(){
         $rows = DB::table($this->tbl)->selectRaw('id,name,created_at')->get();
+        foreach($rows as $row){
+            $row->created_at = explode(' ',$row->created_at)[0];
+        }
         return JDV::result($rows);
     }
 

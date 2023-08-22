@@ -53,7 +53,9 @@ class MainProgram
 
     function list(){
         $rows = DB::table($this->tbl.' as m')->join('department as d','m.department_id','=','d.id')->join('level as l','l.id','=','m.program_id')->selectRaw('m.id,m.name,d.name as department,l.name as level,m.updated_at')->get();
-
+        foreach($rows as $row){
+            $row->updated_at = explode(' ',$row->updated_at)[0];
+        }
         return JDV::result($rows);
     }
 

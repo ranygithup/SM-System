@@ -1,0 +1,1 @@
+<div id="_main_registrationComponent" style="display:none"></div>
