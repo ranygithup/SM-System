@@ -70,10 +70,6 @@ var MainProgramComponent = new function(){
                 data: "name"
             },
             {
-                title: "Level",
-                data:"level"
-            },
-            {
                 title: "Department",
                 data: "department"
             },
@@ -161,12 +157,6 @@ let loadProgramOption = (onFinish = null) => {
             </div>
         </div>
         <div class="form-group mt-3">
-            <label for="program_id" class="form-label">Program</label>
-            <div class="width-select-in-form">
-                <select id="main_program_level" class="modal-select2 form-control data-input" data-field="program_id"></select>
-            </div>
-        </div>
-        <div class="form-group mt-3">
             <label for="name" class="form-label">Name</label>
             <input type="text" class="form-control data-input" data-field="name"/>
         </div>`].join('');
@@ -181,37 +171,6 @@ const main_program = new Modal({
     api_save: 'api/main-program/save',
     api_modify: 'api/main-program/details'
 });
-
-main_program.addOption = function(data=null){
-    let modal = $(`#${this.id}`),
-    department = modal.find('#main_program_department'),
-    program = modal.find('#main_program_level');
-
-    let init = $.isEmptyObject(data) ? null : data;
-
-    department.on('change',function(e){
-        e.preventDefault();
-        let op = {
-            'department_id': $(this).val()
-        };
-        if(op.department_id > 0){
-            api.postData('api/options/level',op).then(res => {
-                let d = [];
-                if(res.status === 200){
-                    d = res.data;
-                }
-
-                if(init)
-                    util.setComboItems(program,d,'id','name',init.program_id);
-                else
-                    util.setComboItems(program,d,'id','name',null);
-            });
-        }
-    });
-
-    if(init)
-        department.trigger('change');
-};
 
 window.addEventListener('DOMContentLoaded',() => {
     MainProgramComponent.init();
