@@ -1,6 +1,5 @@
 class Interact{
-    __constructor(){}
-
+    constructor(){}
     confirm = (title, callback=null) => {
         Swal.fire({
             title: title,

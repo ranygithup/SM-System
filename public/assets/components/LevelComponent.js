@@ -129,9 +129,6 @@ var LevelComponent = new function(){
     this.show = (options) => {
         if(!options) options = {};
         mThis.displayLevel(() => {
-            new ExpandableRow(mThis.tblLevel,{
-                dontOnClick: ['btn-lvl-modify','btn-lvl-delete']
-            });
             main_view.setTitle(mThis.title_prop);
             mThis.self.show().siblings().hide();
         });

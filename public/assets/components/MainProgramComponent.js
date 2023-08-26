@@ -129,9 +129,6 @@ var MainProgramComponent = new function(){
     this.show = (options) => {
         if(!options) options = {};
         mThis.displayMainProgram(() => {
-            new ExpandableRow(mThis.tblMainProgram,{
-                dontOnClick: ['btn-mpg-modify','btn-mpg-delete']
-            });
             main_view.setTitle(mThis.title_prop);
             mThis.self.show().siblings().hide();
         });

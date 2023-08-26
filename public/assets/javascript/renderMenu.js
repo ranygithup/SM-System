@@ -11,19 +11,46 @@ window.addEventListener('DOMContentLoaded', () => {
             'icon':'registration.png'
         },
         {
-            'name':'Department',
-            'component':'DepartmentComponent',
-            'icon':'department.png'
+            'name':'Manage Department',
+            'icon':'department.png',
+            'sub_menu':[
+                {
+                    'name':'Department',
+                    'component':'DepartmentComponent',
+                    'icon':'department.png'
+                },
+                {
+                    'name':'Class',
+                    'component':'LevelComponent',
+                    'icon':'level.png'
+                },
+                {
+                    'name':'Main Program',
+                    'component':'MainProgramComponent',
+                    'icon':'main_programs.png'
+                },
+                {
+                    'name':'Group Level',
+                    'component':'GroupLevelComponent',
+                    'icon':'group_level.png'
+                }
+            ]
         },
         {
-            'name':'Level',
-            'component':'LevelComponent',
-            'icon':'level.png'
-        },
-        {
-            'name':'Main Program',
-            'component':'MainProgramComponent',
-            'icon':'main_programs.png'
+            'name':'Class Management',
+            'icon':'class_management.png',
+            'sub_menu':[
+                {
+                    'name':'Assign Program',
+                    'component':'AssignProgramComponent',
+                    'icon':'assign_program.png'
+                },
+                {
+                    'name':'Assign Level',
+                    'component':'AssignLevelComponent',
+                    'icon':'assign_class.png'
+                }
+            ]
         },
         {
             'name':'Services',
@@ -36,14 +63,20 @@ window.addEventListener('DOMContentLoaded', () => {
             'icon':'book.png'
         },
         {
-            'name':'Invoices',
-            'component':'InvoicesComponent',
-            'icon':'invoice.png'
-        },
-        {
-            'name':'Receipt',
-            'component':'ReceiptComponent',
-            'icon':'receipt.png'
+            'name':'Payment Processing',
+            'icon':'payment_processing.png',
+            'sub_menu':[
+                {
+                    'name':'Invoices',
+                    'component':'InvoicesComponent',
+                    'icon':'invoice.png'
+                },
+                {
+                    'name':'Receipt',
+                    'component':'ReceiptComponent',
+                    'icon':'receipt.png'
+                }
+            ]
         },
         {
             'name':'Certificate',
